@@ -1,0 +1,7 @@
+sequenceDiagram
+    participant U as User
+    participant F as Frontend (React)
+
+    U->>F: Clic en el botón "Exportar a PDF"
+    F->>F: Generar un PDF con los datos mostrados
+    F-->>U: Descargar el PDF

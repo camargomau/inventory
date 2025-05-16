@@ -1,0 +1,13 @@
+flowchart LR
+    subgraph Frontend
+        A[React App]
+    end
+    subgraph Backend
+        B[Spring Boot API]
+    end
+    subgraph Base de Datos
+        C[(MySQL)]
+    end
+
+    A -- "Llamadas de la API REST" --> B
+    B -- "JDBC" --> C

@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant U as User
+    participant F as Frontend (React)
+    participant B as Backend (Spring Boot)
+    participant D as Database (MySQL)
+
+    U->>F: Llenar el formulario de inicio de sesión y enviarlo
+    F->>B: POST /api/auth/login (credenciales)
+    B->>D: SELECT user by email
+    D-->>B: Datos del usuario
+    B-->>F: Token JWT token o error
+    F-->>U: Continuar a la página principal
