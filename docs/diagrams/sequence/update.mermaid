@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant U as Usuario
+    participant F as Frontend (React)
+    participant B as Backend (Spring Boot)
+    participant D as Database (MySQL)
+
+    U->>F: Clic al botón "Editar" del ítem y enviar los cambios
+    F->>B: PUT /api/items/{id} (datos actualizados)
+    B->>D: UPDATE items SET ...
+    D-->>B: Éxito/Fallo
+    B->>D: INSERT INTO operations (update)
+    D-->>B: Éxito
+    B-->>F: Respuesta de actualizar
+    F-->>U: Mostrar el resultado

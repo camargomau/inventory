@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant U as Usuario
+    participant F as Frontend (React)
+    participant B as Backend (Spring Boot)
+    participant D as Base de datos (MySQL)
+
+    U->>F: Clic al botón "Borrar" del ítem
+    F->>B: DELETE /api/items/{id}
+    B->>D: DELETE FROM items WHERE id=...
+    D-->>B: Éxito/Fallo
+    B->>D: INSERT INTO operations (delete)
+    D-->>B: Éxito
+    B-->>F: Respuesta de eliminar
+    F-->>U: Mostrar el resultado

@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant U as Usuario
+    participant F as Frontend (React)
+    participant B as Backend (Spring Boot)
+    participant D as Database (MySQL)
+
+    U->>F: Llenar el formulario de registro y enviarlo
+    F->>B: POST /api/auth/register (datos del usuario)
+    B->>D: INSERT INTO users
+    D-->>B: Éxito/Fallo
+    B-->>F: Resultado "registration"
+    F-->>U: Mostrar el estatus de registro
