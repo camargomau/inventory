@@ -59,6 +59,14 @@ public class ItemService {
         itemRepository.delete(item);
     }
 
+    public ItemResponse deleteItemAndReturn(Integer id) {
+        Item item = itemRepository.findByItemId(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Item not found with id: " + id));
+        ItemResponse response = toResponse(item);
+        itemRepository.delete(item);
+        return response;
+    }
+
     private ItemResponse toResponse(Item item) {
         return ItemResponse.builder()
                 .itemId(item.getItemId())

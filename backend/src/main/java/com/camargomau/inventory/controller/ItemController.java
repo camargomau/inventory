@@ -38,8 +38,8 @@ public class ItemController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteItem(@PathVariable Integer id) {
-        itemService.deleteItem(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<ItemResponse> deleteItem(@PathVariable Integer id) {
+        ItemResponse deleted = itemService.deleteItemAndReturn(id);
+        return ResponseEntity.ok(deleted);
     }
 }
