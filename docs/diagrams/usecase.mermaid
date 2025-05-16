@@ -1,0 +1,17 @@
+graph TD
+    User([User])
+    Register((Register))
+    Login((Login))
+    AddItem((Add Item))
+    UpdateItem((Update Item))
+    DeleteItem((Delete Item))
+    ViewInventory((View Inventory))
+    ExportPDF((Export PDF))
+
+    User --> Register
+    User --> Login
+    User --> AddItem
+    User --> UpdateItem
+    User --> DeleteItem
+    User --> ViewInventory
+    User --> ExportPDF
