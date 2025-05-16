@@ -1,0 +1,59 @@
+\ProvidesPackage{auxiliary/utilities/preamble}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, mexico]{babel}
+\usepackage[skip=12pt]{parskip}
+\usepackage{import}
+
+\usepackage[x11names]{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{nicefrac}
+\usepackage{multirow}
+\usepackage{multicol}
+
+\usepackage{xurl}
+\usepackage{hyperref}
+
+\usepackage{listings}
+\usepackage{enumitem}
+
+\usepackage[nottoc,numbib]{tocbibind}
+
+% 0 for not using numbering, 1 for numbering chapters
+% 2 for chapters and sections, etc.
+\setcounter{secnumdepth}{0}
+\setcounter{tocdepth}{2}
+
+\hypersetup{
+    breaklinks=true,
+    colorlinks=true,
+    linkcolor=DodgerBlue3,
+    urlcolor=DodgerBlue3
+}
+
+\lstdefinestyle{code}{
+    language=Python,
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\color{Coral2},
+    commentstyle=\color{DarkSeaGreen4},
+    numbers=left,
+    numberstyle=\tiny,
+    numbersep=5pt,
+    breaklines=true,
+    showspaces=false,
+    showstringspaces=false,
+}
+
+\lstdefinestyle{terminal}{
+    basicstyle=\footnotesize\ttfamily,
+    breaklines=true,
+    showspaces=false,
+    showstringspaces=false,
+}
+
+\bibliographystyle{apalike}
