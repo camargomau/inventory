@@ -11,9 +11,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 public class ItemRequest {
-    private String name;
-    private String description;
-    private String sku;
-    private BigDecimal price;
-    private Integer quantity;
+	private String name;
+	private String description;
+	private String sku;
+	private BigDecimal price;
+	private Integer quantity;
 }

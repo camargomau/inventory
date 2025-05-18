@@ -15,7 +15,7 @@ CREATE TABLE items (
 	description TEXT,
 	sku VARCHAR(50) NOT NULL UNIQUE,
 	price DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-    quantity INT NOT NULL CHECK (quantity >= 0),
+	quantity INT NOT NULL CHECK (quantity >= 0),
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

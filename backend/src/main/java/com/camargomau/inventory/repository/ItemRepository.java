@@ -8,6 +8,6 @@ import java.util.Optional;
 // Repository interface for Item entity
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
-    Optional<Item> findBySku(String sku);
-    Optional<Item> findByItemId(Integer itemId);
+	Optional<Item> findBySku(String sku);
+	Optional<Item> findByItemId(Integer itemId);
 }

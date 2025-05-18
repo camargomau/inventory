@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final AuthService authService;
+	private final AuthService authService;
 
-    // POST /api/auth/register registers a new user
-    @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authService.register(request));
-    }
+	// POST /api/auth/register registers a new user
+	@PostMapping("/register")
+	public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+		return ResponseEntity.ok(authService.register(request));
+	}
 
-    // POST /api/auth/login logs in a user (i.e. returns a JWT token if it exists)
-    @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
-        return ResponseEntity.ok(authService.login(request));
-    }
+	// POST /api/auth/login logs in a user (i.e. returns a JWT token if it exists)
+	@PostMapping("/login")
+	public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
+		return ResponseEntity.ok(authService.login(request));
+	}
 }
