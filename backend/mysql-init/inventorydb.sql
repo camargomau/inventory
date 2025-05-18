@@ -1,3 +1,4 @@
+/* Table users for authentication management */
 CREATE TABLE users (
 	user_id INT AUTO_INCREMENT PRIMARY KEY,
 	username VARCHAR(50) NOT NULL UNIQUE,
@@ -7,6 +8,7 @@ CREATE TABLE users (
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+/* Table users for inventory management */
 CREATE TABLE items (
 	item_id INT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(100) NOT NULL,
@@ -17,6 +19,7 @@ CREATE TABLE items (
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+/* Table operations for tracking inventory changes */
 CREATE TABLE operations (
 	operation_id INT AUTO_INCREMENT PRIMARY KEY,
 	user_id INT NOT NULL,
