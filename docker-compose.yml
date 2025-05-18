@@ -11,5 +11,17 @@ services:
       - db_data:/var/lib/mysql
       - ./backend/mysql-init:/docker-entrypoint-initdb.d
 
+  backend:
+    build: ./backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/inventorydb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      JWT_SECRET: UJ2uJcjJD8IuEUSrghpmJdDqupNTRHI8Mr07Qff4OKIgpxMpB8Uj8kleEK2PvBttyUTk5j/kIuzKP+Tzj31Uw==
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+
 volumes:
   db_data:
