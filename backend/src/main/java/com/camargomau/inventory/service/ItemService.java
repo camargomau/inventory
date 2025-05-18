@@ -11,24 +11,33 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// Service class that handles CRUD operations for inventory items
+
 @Service
 @RequiredArgsConstructor
 public class ItemService {
 
+    // Repository for accessing item data in the database
     private final ItemRepository itemRepository;
 
+    // Retrieves all items from the inventory.
+    // Returns a List of ItemResponse DTOs
     public List<ItemResponse> getAllItems() {
         return itemRepository.findAll().stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
 
+    // Retrieves a specific item by its ID.
+    // Returns an ItemResponse DTO
     public ItemResponse getItemById(Integer id) {
         Item item = itemRepository.findByItemId(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Item not found with id: " + id));
         return toResponse(item);
     }
 
+    // Creates a new item in the inventory.
+    // Returns an ItemResponse DTO for the created item
     public ItemResponse createItem(ItemRequest request) {
         Item item = Item.builder()
                 .name(request.getName())
@@ -41,6 +50,8 @@ public class ItemService {
         return toResponse(saved);
     }
 
+    // Updates an existing item.
+    // Returns an ItemResponse DTO for the updated item
     public ItemResponse updateItem(Integer id, ItemRequest request) {
         Item item = itemRepository.findByItemId(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Item not found with id: " + id));
@@ -53,12 +64,15 @@ public class ItemService {
         return toResponse(updated);
     }
 
+    // Deletes an item by its ID.
     public void deleteItem(Integer id) {
         Item item = itemRepository.findByItemId(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Item not found with id: " + id));
         itemRepository.delete(item);
     }
 
+    // Deletes an item and returns its data before deletion.
+    // Returns an ItemResponse DTO for the deleted item
     public ItemResponse deleteItemAndReturn(Integer id) {
         Item item = itemRepository.findByItemId(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Item not found with id: " + id));
@@ -67,6 +81,7 @@ public class ItemService {
         return response;
     }
 
+    // Converts an Item entity to an ItemResponse DTO.
     private ItemResponse toResponse(Item item) {
         return ItemResponse.builder()
                 .itemId(item.getItemId())
