@@ -45,6 +45,10 @@ public class Item {
 	@Column(nullable = false)
 	private Integer quantity;
 
+	@Column(nullable = false)
+	@Builder.Default
+	private Boolean available = true;
+
 	@Column(name = "created_at", updatable = false)
 	private LocalDateTime createdAt;
 

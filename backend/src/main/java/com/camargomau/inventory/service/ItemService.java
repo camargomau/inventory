@@ -39,7 +39,7 @@ public class ItemService {
 	// Retrieves all items from the inventory
 	// Returns a List of ItemResponse DTOs
 	public List<ItemResponse> getAllItems() {
-		return itemRepository.findAll().stream()
+		return itemRepository.findAllByAvailableTrue().stream()
 				.map(this::toResponse)
 				.collect(Collectors.toList());
 	}
@@ -47,7 +47,7 @@ public class ItemService {
 	// Retrieves a specific item by its ID
 	// Returns an ItemResponse DTO
 	public ItemResponse getItemById(Integer id) {
-		Item item = itemRepository.findByItemId(id)
+		Item item = itemRepository.findByItemIdAndAvailableTrue(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Item not found with id: " + id));
 		return toResponse(item);
 	}
@@ -104,32 +104,25 @@ public class ItemService {
 		return toResponse(updated);
 	}
 
-	// Deletes an item by its ID
-	public void deleteItem(Integer id) {
-		Item item = itemRepository.findByItemId(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Item not found with id: " + id));
-		int quantityBefore = item.getQuantity();
-
-		// Log operation before deletion
-		Operation op = Operation.builder()
-				.user(getCurrentUser())
-				.item(item)
-				.operationType(Operation.OperationType.delete)
-				.quantityBefore(quantityBefore)
-				.quantityAfter(0)
-				.build();
-		operationRepository.save(op);
-
-		itemRepository.delete(item);
-	}
-
 	// Deletes an item and returns its data before deletion
 	// Returns an ItemResponse DTO for the deleted item
 	public ItemResponse deleteItemAndReturn(Integer id) {
 		Item item = itemRepository.findByItemId(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Item not found with id: " + id));
 		ItemResponse response = toResponse(item);
-		itemRepository.delete(item);
+
+		// Log operation before soft deletion
+		Operation op = Operation.builder()
+				.user(getCurrentUser())
+				.item(item)
+				.operationType(Operation.OperationType.delete)
+				.quantityBefore(item.getQuantity())
+				.quantityAfter(0)
+				.build();
+		operationRepository.save(op);
+
+		item.setAvailable(false);
+		itemRepository.save(item);
 		return response;
 	}
 

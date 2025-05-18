@@ -16,7 +16,8 @@ CREATE TABLE items (
 	sku VARCHAR(50) NOT NULL UNIQUE,
 	price DECIMAL(10,2) NOT NULL DEFAULT 0.00,
 	quantity INT NOT NULL CHECK (quantity >= 0),
-	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	available BOOLEAN NOT NULL DEFAULT 1
 );
 
 /* Table operations for tracking inventory changes */
