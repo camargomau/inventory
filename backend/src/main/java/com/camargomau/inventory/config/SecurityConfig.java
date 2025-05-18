@@ -36,9 +36,14 @@ public class SecurityConfig {
 			// Sets session management to stateless (no HTTP session, uses JWT)
 			.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			// Allows unauthenticated access to /api/auth/** endpoints (how are users going to register or log in otherwise?)
-			// Requires authentication for all other endpoints
+			// Allow Swagger/OpenAPI endpoints as well
 			.authorizeHttpRequests(auth -> auth
-				.requestMatchers("/api/auth/**").permitAll()
+				.requestMatchers(
+					"/api/auth/**",
+					"/v3/api-docs/**",
+					"/swagger-ui/**",
+					"/swagger-ui.html"
+				).permitAll()
 				.anyRequest().authenticated()
 			)
 			.authenticationProvider(daoAuthenticationProvider())
