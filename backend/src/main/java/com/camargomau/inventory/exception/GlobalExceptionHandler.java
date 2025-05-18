@@ -8,9 +8,13 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+// Global exception handler for the REST API
+// Catches exceptions thrown by controllers and returns structured error responses
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    // Handles ResourceNotFoundException and returns a 404 Not Found response
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> handleResourceNotFound(ResourceNotFoundException ex) {
         Map<String, Object> body = new HashMap<>();
@@ -21,6 +25,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
+    // Handles all other exceptions and returns a 500 Internal Server Error response
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGeneral(Exception ex) {
         Map<String, Object> body = new HashMap<>();
