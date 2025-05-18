@@ -9,10 +9,7 @@ import {
   Group,
   Stack,
 } from "@mantine/core";
-import axios from "axios";
-
-// Get API URL from Vite environment variable
-const API_URL = import.meta.env.VITE_API_URL;
+import { login, register } from "../api/auth"; // Import API functions
 
 export default function AuthForm({ setToken }) {
   // "login" or "register"
@@ -51,19 +48,12 @@ export default function AuthForm({ setToken }) {
     setLoading(true);
 
     try {
-      // Choose endpoint and payload based on mode
-      const url =
+      // Use API functions from api/auth.js
+      const data =
         mode === "login"
-          ? `${API_URL}/api/auth/login`
-          : `${API_URL}/api/auth/register`;
-      const payload =
-        mode === "login"
-          ? { email, password }
-          : { username, email, password };
-      // Send POST request to backend
-      const { data } = await axios.post(url, payload);
+          ? await login(email, password)
+          : await register(username, email, password);
       // Store JWT token in localStorage
-      // if it stored there, then App.jsx will redirect to Dashboard instead of LandingPage
       localStorage.setItem("token", data.token);
       // Update parent state to trigger redirect to Dashboard in App.jsx
       setToken(data.token);
@@ -72,6 +62,7 @@ export default function AuthForm({ setToken }) {
       setError(
         err.response?.data?.message ||
           err.response?.data?.error ||
+          err.message ||
           "Authentication failed"
       );
     } finally {
