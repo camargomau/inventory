@@ -4,6 +4,8 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
+// Item response returns itemId, name, description, sku, quantity, createdAt
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

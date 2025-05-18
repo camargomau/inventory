@@ -4,6 +4,8 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
+// Requesting an Item requires name, description, sku, price, quantity
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
