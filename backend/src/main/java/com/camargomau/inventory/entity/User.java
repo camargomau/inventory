@@ -5,6 +5,15 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+// Entity class representing an entry in the users table
+
+// // user_id INT AUTO_INCREMENT PRIMARY KEY,
+// // username VARCHAR(50) NOT NULL UNIQUE,
+// // email VARCHAR(100) NOT NULL UNIQUE,
+// // password_hash VARCHAR(255) NOT NULL,
+// // is_admin BOOLEAN NOT NULL DEFAULT 0,
+// // created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
 @Entity
 @Table(name = "users")
 @Data

@@ -6,6 +6,16 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+// Entity class representing an entry in the items table
+
+// // item_id INT AUTO_INCREMENT PRIMARY KEY,
+// // name VARCHAR(100) NOT NULL,
+// // description TEXT,
+// // sku VARCHAR(50) NOT NULL UNIQUE,
+// // price DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+// // quantity INT NOT NULL CHECK (quantity >= 0),
+// // created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
 @Entity
 @Table(name = "items")
 @Data

@@ -5,6 +5,16 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+// Entity class representing an entry in the users table
+
+// // operation_id INT AUTO_INCREMENT PRIMARY KEY,
+// // user_id INT NOT NULL,
+// // item_id INT NOT NULL,
+// // operation_type ENUM('add', 'update', 'delete') NOT NULL,
+// // quantity_before INT NOT NULL,
+// // quantity_after INT NOT NULL,
+// // operation_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
 @Entity
 @Table(name = "operations")
 @Data
