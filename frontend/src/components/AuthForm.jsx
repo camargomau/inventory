@@ -42,7 +42,7 @@ export default function AuthForm({ setToken }) {
   // Function for handling form submission
   const handleSubmit = async (e) => {
     // Prevent default non-React form submission
-    e.preventDefult();
+    e.preventDefault();
     // Clear any previous messages
     setError("");
 
@@ -82,17 +82,12 @@ export default function AuthForm({ setToken }) {
   // Render authentication form
   return (
     <Paper p="md" radius="md" withBorder style={{ maxWidth: 340, margin: "40px auto" }}>
-      {/* App title */}
-      <Title align="center" order={2} mb="md">
-        Inventory
-      </Title>
-
-      {/* Subtitle based on mode */}
-      <Text align="center" mb="md">
+      {/* Title based on mode */}
+      <Title order={2} mb="md">
         {mode === "login"
           ? "Login"
           : "Register"}
-      </Text>
+      </Title>
 
       {/* Auth form */}
       <form onSubmit={handleSubmit}>
