@@ -6,6 +6,7 @@ import com.camargomau.inventory.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -32,14 +33,14 @@ public class ItemController {
 
 	// POST /api/items creates a new item
 	@PostMapping
-	public ResponseEntity<ItemResponse> createItem(@RequestBody ItemRequest request) {
+	public ResponseEntity<ItemResponse> createItem(@RequestBody @Valid ItemRequest request) {
 		ItemResponse created = itemService.createItem(request);
 		return ResponseEntity.status(201).body(created);
 	}
 
 	// PUT /api/items/{id} updates a specific item
 	@PutMapping("/{id}")
-	public ItemResponse updateItem(@PathVariable Integer id, @RequestBody ItemRequest request) {
+	public ItemResponse updateItem(@PathVariable Integer id, @RequestBody @Valid ItemRequest request) {
 		return itemService.updateItem(id, request);
 	}
 

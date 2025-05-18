@@ -7,6 +7,7 @@ import com.camargomau.inventory.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 // REST controller for authentication
 
@@ -19,13 +20,13 @@ public class AuthController {
 
 	// POST /api/auth/register registers a new user
 	@PostMapping("/register")
-	public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+	public ResponseEntity<AuthResponse> register(@RequestBody @Valid RegisterRequest request) {
 		return ResponseEntity.ok(authService.register(request));
 	}
 
 	// POST /api/auth/login logs in a user (i.e. returns a JWT token if it exists)
 	@PostMapping("/login")
-	public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
+	public ResponseEntity<AuthResponse> login(@RequestBody @Valid AuthRequest request) {
 		return ResponseEntity.ok(authService.login(request));
 	}
 }
