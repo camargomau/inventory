@@ -16,6 +16,7 @@ export default function Dashboard({ token, setToken }) {
     editedIds,
     deletedIds,
     addedIds,
+    restoredIds,
     addModalOpen,
     setAddModalOpen,
     addError,
@@ -142,6 +143,7 @@ export default function Dashboard({ token, setToken }) {
         editedIds={editedIds}
         deletedIds={deletedIds}
         addedIds={addedIds}
+        restoredIds={restoredIds}
         visibleFields={visibleFields}
         onFieldToggle={handleFieldToggle}
         deletedView={showDeleted}

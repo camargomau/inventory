@@ -14,6 +14,7 @@ export default function InventoryTable({
   editedIds = [],
   deletedIds = [],
   addedIds = [],
+  restoredIds = [],
   visibleFields,
   onFieldToggle,
   deletedView = false,
@@ -107,6 +108,7 @@ export default function InventoryTable({
                   isEdited={editedIds.includes(id)}
                   isDeleted={deletedIds.includes(id)}
                   isAdded={addedIds.includes(id)}
+                  isRestored={restoredIds.includes(id)}
                   onEdit={onEdit}
                   onDelete={onDelete}
                   onRestore={onRestore}

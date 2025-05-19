@@ -11,6 +11,7 @@ export default function TableRow({
   isEdited,
   isDeleted,
   isAdded,
+  isRestored,
   onEdit,
   onDelete,
   onRestore,
@@ -28,11 +29,12 @@ export default function TableRow({
   // State for confirmation modal: { open: boolean, type: 'edit' | 'delete' | 'restore' | null }
   const [confirmModal, setConfirmModal] = useState({ open: false, type: null });
 
-  // Row color logic for edited, deleted, or added rows
+  // Row color logic for edited, deleted, added, or restored rows
   const getRowStyle = () => {
-    if (isDeleted) return { background: "var(--mantine-color-red-0)", textDecoration: "line-through" };
-    if (isAdded) return { background: "var(--mantine-color-green-0)" };
-    if (isEdited) return { background: "var(--mantine-color-blue-0)" };
+    if (isDeleted) return { background: "var(--mantine-color-red-1)", textDecoration: "line-through" };
+    if (isRestored) return { background: "var(--mantine-color-orange-1" };
+    if (isAdded) return { background: "var(--mantine-color-green-1)" };
+    if (isEdited) return { background: "var(--mantine-color-indigo-1)" };
     return {};
   };
 

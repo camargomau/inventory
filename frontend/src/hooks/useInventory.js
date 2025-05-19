@@ -9,10 +9,11 @@ export function useInventory(token) {
   const [items, setItems] = useState([]);
  // Indicates if a request is in progress (for loading spinners, etc.)
   const [loading, setLoading] = useState(true);
-  // Track edited, deleted, and added item IDs for UI feedback (row highlight colours)
+  // Track edited, deleted, added, and restored item IDs for UI feedback (row highlight colours)
   const [editedIds, setEditedIds] = useState([]);
   const [deletedIds, setDeletedIds] = useState([]);
   const [addedIds, setAddedIds] = useState([]);
+  const [restoredIds, setRestoredIds] = useState([]);
   // Modal and error state for adding items
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [addError, setAddError] = useState("");
@@ -29,6 +30,7 @@ export function useInventory(token) {
       setEditedIds([]);
       setDeletedIds([]);
       setAddedIds([]);
+      setRestoredIds([]); // Clear restored highlights on refresh
     } finally {
       setLoading(false);
     }
@@ -76,11 +78,14 @@ export function useInventory(token) {
   // Restore item handler: calls API, updates state
   const handleRestore = async (id) => {
     await restoreItem(id, token);
-    fetchItems(true);
+    setRestoredIds((prev) => [...new Set([...prev, id])]);
   };
 
   // Toggle between normal and deleted view
-  const toggleShowDeleted = () => setShowDeleted((v) => !v);
+  const toggleShowDeleted = () => {
+    setShowDeleted((v) => !v);
+    setRestoredIds([]); // Clear restored highlights when toggling view
+  };
 
   // Refresh handler: re-fetches items
   const handleRefresh = () => {
@@ -110,6 +115,7 @@ export function useInventory(token) {
     editedIds,
     deletedIds,
     addedIds,
+    restoredIds,
     addModalOpen,
     setAddModalOpen,
     addError,
