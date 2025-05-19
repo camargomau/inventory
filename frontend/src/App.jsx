@@ -2,6 +2,7 @@ import { useState } from "react";
 import { TokenContext } from "./context/TokenContext";
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
+import NewDashboard from "./pages/NewDashboard";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -10,7 +11,7 @@ function App() {
   return (
     <TokenContext.Provider value={{ token, setToken }}>
       {token ? (
-        <Dashboard />
+        <NewDashboard />
       ) : (
         <LandingPage />
       )}
