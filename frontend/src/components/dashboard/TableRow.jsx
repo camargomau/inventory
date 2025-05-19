@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Table, Group } from "@mantine/core";
-import InventoryCell from "./InventoryCell";
-import InventoryRowActions from "./InventoryRowActions";
+import TableCell from "./TableCell";
+import TableRowActions from "./TableRowActions";
 
 // Renders a single inventory row, including actions
-export default function InventoryRow({
+export default function TableRow({
   item,
   fields,
   visibleFields,
@@ -37,7 +37,7 @@ export default function InventoryRow({
         .filter((field) => visibleFields.includes(field))
         .map((field) => (
           <Table.Td key={field}>
-            <InventoryCell
+            <TableCell
               field={field}
               value={item[field]}
               isEditing={isEditing}
@@ -49,7 +49,7 @@ export default function InventoryRow({
         ))}
       <Table.Td>
         <Group gap="xs" wrap="nowrap">
-          <InventoryRowActions
+          <TableRowActions
             isEditing={isEditing}
             isDeleted={isDeleted}
             onEditClick={() => {

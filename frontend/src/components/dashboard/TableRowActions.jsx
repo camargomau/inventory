@@ -3,7 +3,7 @@ import { Pencil, Trash2, Check, X } from "lucide-react";
 import ConfirmModal from "./ConfirmModal";
 
 // Edit/delete/confirm/cancel actions for a row
-export default function InventoryRowActions({
+export default function TableRowActions({
   isEditing,
   isDeleted,
   onEditClick,

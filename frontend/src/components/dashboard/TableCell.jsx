@@ -1,8 +1,8 @@
 import { TextInput, NumberInput, Text } from "@mantine/core";
-import { formatDate } from "../utils/tableUtils";
+import { formatDate } from "../../utils/tableUtils";
 
 // Renders a single cell, handling edit/view and type
-export default function InventoryCell({
+export default function TableCell({
   field,
   value,
   isEditing,
