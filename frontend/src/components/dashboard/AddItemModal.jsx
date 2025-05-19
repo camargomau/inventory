@@ -54,12 +54,12 @@ export default function AddItemModal({ opened, onClose, onAdd, error }) {
 
   // Render modal with form and JSON tabs
   return (
-    <Modal opened={opened} onClose={onClose} title="Add New Item" centered>
+    <Modal opened={opened} onClose={onClose} title="Add new item" centered>
       {/* Tabs for switching between form and JSON input */}
       <Tabs value={tab} onChange={setTab}>
         <Tabs.List>
-          <Tabs.Tab value="form">Form</Tabs.Tab>
-          <Tabs.Tab value="json">Paste JSON</Tabs.Tab>
+          <Tabs.Tab value="form">Interactive</Tabs.Tab>
+          <Tabs.Tab value="json">JSON</Tabs.Tab>
         </Tabs.List>
         <Tabs.Panel value="form" pt="xs">
           {/* Form fields for item details */}
