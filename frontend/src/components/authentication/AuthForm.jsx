@@ -1,26 +1,70 @@
-import { Button, Paper, Title, Text, Stack } from "@mantine/core";
-import { AuthInputs } from "./AuthInputs";
-import { AuthToggle } from "./AuthToggle";
-import { useAuthForm } from "../../hooks/useAuthForm";
+import { useState } from "react";
+import { Button, Paper, Title, Text, Stack, TextInput, PasswordInput, Group } from "@mantine/core";
+import { useToken } from "../../context/TokenContext";
+import { login, register } from "../../api/auth";
 
-export default function AuthForm({ setToken }) {
-  // Use custom hook for authentication form logic
-  const {
-    mode,
-    setMode,
-    email,
-    setEmail,
-    password,
-    setPassword,
-    username,
-    setUsername,
-    error,
-    setError,
-    loading,
-    handleSubmit,
-  } = useAuthForm(setToken);
+// Simple client-side validation for register
+// These constraints are set in the backend as well
+// see backend/src/main/java/com/camargomau/inventory/dto/RegisterRequest.java
+function validateRegister(username, password, setError) {
+  if (username.length < 3 || username.length > 32) {
+    setError("Username must be 3-32 characters.");
+    return false;
+  }
+  if (password.length < 6 || password.length > 64) {
+    setError("Password must be 6-64 characters.");
+    return false;
+  }
+  return true;
+};
 
-  // Render authentication form
+// Function for handling form submission
+async function handleSubmit(e, username, email, password, mode, setError, setLoading, setToken) {
+  // Prevent default non-React form submission
+  e.preventDefault();
+  // Clear any previous messages
+  setError("");
+
+  // Validate register fields if in register mode
+  if (mode === "register" && !validateRegister()) return;
+  setLoading(true);
+
+  try {
+    // Use API functions from api/auth.js
+    const data =
+      mode === "login"
+        ? await login(email, password)
+        : await register(username, email, password);
+    // Store JWT token in localStorage
+    localStorage.setItem("token", data.token);
+    // Update parent state to trigger redirect to Dashboard in App.jsx
+    setToken(data.token);
+  } catch (err) {
+    // Show error message from API or fallback
+    setError(
+      err.response?.data?.message ||
+        err.response?.data?.error ||
+        err.message ||
+        "Authentication failed"
+    );
+  } finally {
+    setLoading(false);
+  }
+};
+
+export default function AuthForm() {
+  const { setToken } = useToken();
+
+  // User info
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // Form info
+  // Mode: login or register
+  const [mode, setMode] = useState("login");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   return (
     <Paper
       p="md"
@@ -32,25 +76,49 @@ export default function AuthForm({ setToken }) {
         backgroundColor: "var(--mantine-color-gray-1)"
       }}
     >
-      {/* Title based on mode */}
+      {/* Title (based on mode) */}
       <Title order={2} mb="md">
         {mode === "login" ? "Log In" : "Register"}
       </Title>
 
-      {/* Auth form */}
-      <form onSubmit={handleSubmit}>
+      {/* Input form */}
+      <form onSubmit={(e) => handleSubmit(e, username, email, password, mode, setError, setLoading, setToken)}>
         <Stack>
-          <AuthInputs
-            mode={mode}
-            username={username}
-            setUsername={setUsername}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
+          {/* Username input (only for register mode) */}
+          {mode === "register" && (
+              <TextInput
+                label="Username"
+                placeholder="Enter your username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                minLength={3}
+                maxLength={32}
+              />
+          )}
+
+          {/* Email input */}
+          <TextInput
+            label="Email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            type="email"
           />
 
-          {/* Show error message if present */}
+          {/* Password input */}
+          <PasswordInput
+            label="Password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            minLength={mode === "register" ? 6 : undefined}
+            maxLength={mode === "register" ? 64 : undefined}
+          />
+
+          {/* Show error message (if present) */}
           {error && (
             <Text color="red" size="sm">
               {error}
@@ -64,7 +132,21 @@ export default function AuthForm({ setToken }) {
         </Stack>
       </form>
 
-      <AuthToggle mode={mode} setMode={setMode} setError={setError} />
+      {/* Login/register toggle button */}
+      <Group position="center" mt="md">
+        <Button
+          variant="subtle"
+          size="xs"
+          onClick={() => {
+            setError("");
+            setMode(mode === "login" ? "register" : "login");
+          }}
+        >
+          {mode === "login"
+            ? "Don't have an account?"
+            : "Already have an account?"}
+        </Button>
+      </Group>
     </Paper>
   );
 }
