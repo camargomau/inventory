@@ -1,12 +1,13 @@
 import { useState, useEffect, useMemo } from "react";
 import { Center, Loader, Group, Button, Title, Flex } from "@mantine/core";
+import useToken from "../context/TokenContext";
+
 import InventoryTable from "../components/dashboard/InventoryTable";
 import AddItemModal from "../components/dashboard/AddItemModal";
 import InventoryControls from "../components/dashboard/InventoryControls";
 import { useInventory } from "../hooks/useInventory";
 import { Plus, User, LogOut, Trash2, Package } from "lucide-react";
 import { getUsernameFromToken } from "../utils/jwt";
-import { useToken } from "../context/TokenContext";
 
 // Dashboard page: displays inventory table and add item modal, manages inventory state
 export default function Dashboard() {

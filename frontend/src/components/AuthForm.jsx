@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Paper, Title, Text, Stack, TextInput, PasswordInput, Group } from "@mantine/core";
-import { useToken } from "../context/TokenContext";
+import useToken from "../context/TokenContext";
 import { login, register } from "../api/auth";
 
 // Simple client-side validation for register
