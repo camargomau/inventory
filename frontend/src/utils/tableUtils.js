@@ -1,3 +1,4 @@
+// Function for formatting datetime (YYYY-MM-DD (UTC HH:MM:SS))
 export function formatDate(dateString) {
   if (!dateString) return "";
   const date = new Date(dateString);
@@ -19,6 +20,7 @@ export function formatDate(dateString) {
   );
 }
 
+// User-friendly names for column names
 export const FIELD_LABELS = {
   itemId: "ID",
   id: "ID",
@@ -31,6 +33,7 @@ export const FIELD_LABELS = {
   createdAt: "Creation Date",
 };
 
+// Self-explanatory function to get field names from items
 export function getFields(items) {
   if (!items || items.length === 0) return [];
   return Object.keys(items[0]);
