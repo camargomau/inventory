@@ -22,7 +22,16 @@ export default function AuthForm({ setToken }) {
 
   // Render authentication form
   return (
-    <Paper p="md" radius="md" withBorder style={{ maxWidth: 340, margin: "40px auto", backgroundColor: "var(--mantine-color-gray-1)"}}>
+    <Paper
+      p="md"
+      radius="md"
+      withBorder
+      style={{
+        maxWidth: 340,
+        margin: "40px auto",
+        backgroundColor: "var(--mantine-color-gray-1)"
+      }}
+    >
       {/* Title based on mode */}
       <Title order={2} mb="md">
         {mode === "login" ? "Log In" : "Register"}
