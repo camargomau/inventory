@@ -81,7 +81,8 @@ export default function InventoryTable({
                 right: 0,
                 background: "var(--mantine-primary-color-1)",
                 zIndex: 2,
-                boxShadow: "-2px 0 4px -2px rgba(0,0,0,0.05)",
+                boxShadow: "-1px 0 0 var(--mantine-primary-color-7)",
+                color: "var(--mantine-primary-color-9)",
               }}
             >
               Actions

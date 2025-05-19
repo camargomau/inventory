@@ -59,7 +59,8 @@ export default function TableRow({
           right: 0,
           background: "var(--mantine-primary-color-0)",
           zIndex: 1,
-          boxShadow: "-2px 0 4px -2px rgba(0,0,0,0.05)",
+          boxShadow: "-1px 0 0 0 var(--mantine-primary-color-7)",
+          color: "var(--mantine-primary-color-9)",
         }}
       >
         <Group gap="xs" wrap="nowrap">
