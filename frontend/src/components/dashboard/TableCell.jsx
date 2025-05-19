@@ -45,7 +45,7 @@ export default function TableCell({
     return (
       <Text
         span
-        style={isDeleted ? { textDecoration: "line-through", color: "#c00" } : {}}
+        style={isDeleted ? { textDecoration: "line-through", color: "var(--mantine-color-red-6)" } : {}}
       >
         {formatDate(value)}
       </Text>
@@ -55,7 +55,7 @@ export default function TableCell({
   return (
     <Text
       span
-      style={isDeleted ? { textDecoration: "line-through", color: "#c00" } : {}}
+      style={isDeleted ? { textDecoration: "line-through", color: "var(--mantine-color-red-6)" } : {}}
     >
       {value}
     </Text>

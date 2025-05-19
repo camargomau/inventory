@@ -28,9 +28,9 @@ export default function TableRow({
 
   // Row color logic for edited, deleted, or added rows
   const getRowStyle = () => {
-    if (isDeleted) return { background: "#ffeaea", textDecoration: "line-through" };
-    if (isAdded) return { background: "#eaffea" };
-    if (isEdited) return { background: "#eaf0ff" };
+    if (isDeleted) return { background: "var(--mantine-color-red-0)", textDecoration: "line-through" };
+    if (isAdded) return { background: "var(--mantine-color-green-0)" };
+    if (isEdited) return { background: "var(--mantine-color-blue-0)" };
     return {};
   };
 
@@ -57,7 +57,7 @@ export default function TableRow({
         style={{
           position: "sticky",
           right: 0,
-          background: "#fff",
+          background: "var(--mantine-color-cyan-0)", // Mantine cyan[0] for actions cell
           zIndex: 1,
           boxShadow: "-2px 0 4px -2px rgba(0,0,0,0.05)",
         }}
