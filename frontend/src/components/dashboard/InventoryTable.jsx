@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Table, Group, Text, ScrollArea } from "@mantine/core";
-import InventoryControls from "./InventoryControls";
 import TableRow from "./TableRow";
 import { FIELD_LABELS, getFields } from "../../utils/tableUtils";
 
@@ -25,6 +24,7 @@ export default function InventoryTable({
   // State for editing rows
   const [editRowId, setEditRowId] = useState(null);
   const [editRowData, setEditRowData] = useState({});
+  const [setAddModalOpen] = useState(false);
 
   // Update visibleFields when items change (e.g., after adding first item)
   useEffect(() => {
@@ -72,13 +72,6 @@ export default function InventoryTable({
   // Render inventory table with controls and rows
   return (
     <ScrollArea>
-      <InventoryControls
-        fields={fields}
-        visibleFields={visibleFields}
-        onFieldToggle={handleFieldToggle}
-        onRefresh={onRefresh}
-        onExport={onExport}
-      />
       <Table striped highlightOnHover withTableBorder>
         <Table.Thead>
           <Table.Tr>
@@ -98,6 +91,7 @@ export default function InventoryTable({
             <Table.Th>Actions</Table.Th>
           </Table.Tr>
         </Table.Thead>
+
         <Table.Tbody>
           {/* Render each inventory row */}
           {displayItems.map((item) => {

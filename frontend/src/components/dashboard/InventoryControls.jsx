@@ -1,8 +1,8 @@
-import { Button, Group, Menu, Checkbox } from "@mantine/core";
+import { Button, Group, Menu, Checkbox, Flex } from "@mantine/core";
 import { Eye, EyeOff, RefreshCw, FileDown } from "lucide-react";
 import { FIELD_LABELS } from "../../utils/tableUtils";
 
-// Controls for toggling fields, refreshing, and exporting
+// Controls for toggling fields, refreshing, exporting
 export default function InventoryControls({
   fields,
   visibleFields,
@@ -12,7 +12,7 @@ export default function InventoryControls({
 }) {
   // Render controls for field visibility, refresh, and export
   return (
-    <Group mb="sm">
+    <Group>
       {/* Refresh button */}
       <Button
         variant="outline"

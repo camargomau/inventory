@@ -1,6 +1,7 @@
-import { Center, Loader, Group, Button, Title } from "@mantine/core";
+import { Center, Loader, Group, Button, Title, Flex } from "@mantine/core";
 import InventoryTable from "../components/dashboard/InventoryTable";
 import AddItemModal from "../components/dashboard/AddItemModal";
+import InventoryControls from "../components/dashboard/InventoryControls";
 import { useInventory } from "../hooks/useInventory";
 
 // Dashboard page: displays inventory table and add item modal, manages inventory state
@@ -35,24 +36,25 @@ export default function Dashboard({ token, setToken }) {
   // Render dashboard with inventory table and add item modal
   return (
     <div>
-      {/* Header with title and add button */}
+      {/* Header with title only */}
       <Group justify="space-between" mb="md">
         <Title order={2}>Inventory Dashboard</Title>
-        <Group>
-          <Button onClick={() => setAddModalOpen(true)}>Add Item</Button>
-        </Group>
       </Group>
-      {/* Inventory table with edit/delete/refresh/export */}
-      <InventoryTable
-        items={items}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-        onRefresh={handleRefresh}
-        onExport={handleExport}
-        editedIds={editedIds}
-        deletedIds={deletedIds}
-        addedIds={addedIds}
-      />
+
+      {/* Controls and Add Item button in the same row */}
+      <Flex justify="space-between" align="center" mb="md">
+        <InventoryControls
+          fields={items.length > 0 ? Object.keys(items[0]) : []}
+          visibleFields={[]}
+          onFieldToggle={() => {}}
+          onRefresh={handleRefresh}
+          onExport={handleExport}
+        />
+        <Button onClick={() => setAddModalOpen(true)}>
+          Add Item
+        </Button>
+      </Flex>
+
       {/* Modal for adding a new item */}
       <AddItemModal
         opened={addModalOpen}
@@ -62,6 +64,18 @@ export default function Dashboard({ token, setToken }) {
         }}
         onAdd={handleAdd}
         error={addError}
+      />
+
+      {/* Inventory table */}
+      <InventoryTable
+        items={items}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        onRefresh={handleRefresh}
+        onExport={handleExport}
+        editedIds={editedIds}
+        deletedIds={deletedIds}
+        addedIds={addedIds}
       />
     </div>
   );
