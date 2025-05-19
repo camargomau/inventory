@@ -24,7 +24,7 @@ export default function InventoryControls({
       </Button>
 
       {/* Field visibility menu */}
-      <Menu shadow="md" width={200}>
+      <Menu shadow="md" width={200} closeOnItemClick={false}>
         <Menu.Target>
           <Button variant="outline" size="xs" leftSection={<Eye size={16} />}>
             Show/Hide Fields
