@@ -14,7 +14,19 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         primaryShade: 8,
         defaultRadius: "md",
         fontFamily: "Inter, sans-serif",
-        white: "#f5f5f5",
+        white: "#f8f8f8",
+        components: {
+          Table: {
+            styles: (theme) => ({
+              thead: {
+                backgroundColor: theme.colors.gray[3],
+              },
+              tbody: {
+                backgroundColor: theme.colors.gray[1],
+              },
+            }),
+          },
+        },
       }}
     >
       <App />
