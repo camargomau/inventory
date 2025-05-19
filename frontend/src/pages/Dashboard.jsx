@@ -59,9 +59,21 @@ export default function Dashboard({ token, setToken }) {
   // Render dashboard with inventory table, inventory controrls and add item modal
   return (
     <div>
-      {/* Header with title only */}
+      {/* Header with title and sign out button */}
       <Group justify="space-between" mb="md">
         <Title order={2}>Dashboard</Title>
+        <Group>
+          <Button
+            variant="outline"
+            color="red"
+            onClick={() => {
+              localStorage.removeItem("token");
+              setToken(null);
+            }}
+          >
+            Sign Out
+          </Button>
+        </Group>
       </Group>
 
       {/* Controls and Add Item button in the same row */}
