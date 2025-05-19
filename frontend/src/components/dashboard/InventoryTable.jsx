@@ -63,7 +63,7 @@ export default function InventoryTable({
     <div style={{ position: "relative" }}>
       <ScrollArea style={{ height: "calc(100vh - 145px)" }}>
         <Table striped highlightOnHover withTableBorder style={{ minWidth: 700 }}>
-          <Table.Thead style={{ position: "sticky", top: -1 }}>
+          <Table.Thead style={{ cursor: "pointer", position: "sticky", top: -1 }}>
             <Table.Tr>
               {/* Render table headers for visible fields */}
               {fields
