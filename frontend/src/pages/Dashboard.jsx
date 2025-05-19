@@ -33,12 +33,12 @@ export default function Dashboard({ token, setToken }) {
     );
   }
 
-  // Render dashboard with inventory table and add item modal
+  // Render dashboard with inventory table, inventory controrls and add item modal
   return (
     <div>
       {/* Header with title only */}
       <Group justify="space-between" mb="md">
-        <Title order={2}>Inventory Dashboard</Title>
+        <Title order={2}>Dashboard</Title>
       </Group>
 
       {/* Controls and Add Item button in the same row */}
