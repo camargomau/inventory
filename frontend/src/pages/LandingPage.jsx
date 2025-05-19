@@ -2,7 +2,7 @@ import { Paper } from "@mantine/core";
 import AuthForm from "../components/authentication/AuthForm";
 
 // Landing page: renders authentication form
-export default function LandingPage({ setToken }) {
+export default function LandingPage() {
   // Render project description and AuthForm for login/register
   return (
     <div>
@@ -24,7 +24,7 @@ export default function LandingPage({ setToken }) {
           Add, consult, update, and delete products in real time. Export inventory data as PDF reports.
         </p>
       </Paper>
-      <AuthForm setToken={setToken} />
+      <AuthForm />
     </div>
   );
 }

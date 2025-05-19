@@ -6,9 +6,12 @@ import InventoryControls from "../components/dashboard/InventoryControls";
 import { useInventory } from "../hooks/useInventory";
 import { Plus, User, LogOut, Trash2, Package } from "lucide-react";
 import { getUsernameFromToken } from "../utils/jwt";
+import { useToken } from "../context/TokenContext";
 
 // Dashboard page: displays inventory table and add item modal, manages inventory state
-export default function Dashboard({ token, setToken }) {
+export default function Dashboard() {
+  const { token, setToken } = useToken();
+
   // Use custom hook for inventory logic and state
   const {
     items,
