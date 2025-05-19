@@ -1,6 +1,6 @@
 import { Modal, Button, Group, Text } from "@mantine/core";
 
-export default function ConfirmModal({ opened, onClose, onConfirm, title, message }) {
+export default function ConfirmModal({ opened, onClose, onConfirm, title, message, confirmColor = "red" }) {
   return (
     <Modal opened={opened} onClose={onClose} title={title} centered>
       <Text mb="md">{message}</Text>
@@ -8,7 +8,7 @@ export default function ConfirmModal({ opened, onClose, onConfirm, title, messag
         <Button variant="default" onClick={onClose}>
           Cancel
         </Button>
-        <Button color="red" onClick={onConfirm}>
+        <Button color={confirmColor} onClick={onConfirm}>
           Confirm
         </Button>
       </Group>

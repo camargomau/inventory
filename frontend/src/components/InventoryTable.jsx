@@ -52,6 +52,7 @@ export default function InventoryTable({
   const [editRowId, setEditRowId] = useState(null);
   const [editRowData, setEditRowData] = useState({});
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+  const [confirmEditId, setConfirmEditId] = useState(null);
 
   // Field visibility toggle
   const handleFieldToggle = (field) => {
@@ -205,10 +206,7 @@ export default function InventoryTable({
                           <ActionIcon
                             color="green"
                             variant="light"
-                            onClick={() => {
-                              onEdit(id, editRowData);
-                              setEditRowId(null);
-                            }}
+                            onClick={() => setConfirmEditId(id)}
                           >
                             <Check size={16} />
                           </ActionIcon>
@@ -222,6 +220,19 @@ export default function InventoryTable({
                             <X size={16} />
                           </ActionIcon>
                         </Tooltip>
+                        {/* Confirm edit modal */}
+                        <ConfirmModal
+                          opened={confirmEditId === id}
+                          onClose={() => setConfirmEditId(null)}
+                          onConfirm={() => {
+                            onEdit(id, editRowData);
+                            setEditRowId(null);
+                            setConfirmEditId(null);
+                          }}
+                          title="Confirm edit"
+                          message="Are you sure you want to save these changes?"
+                          confirmColor="blue"
+                        />
                       </>
                     ) : (
                       <>
