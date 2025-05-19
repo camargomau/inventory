@@ -1,10 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Center, Loader, Group, Button, Title, Flex } from "@mantine/core";
 import InventoryTable from "../components/dashboard/InventoryTable";
 import AddItemModal from "../components/dashboard/AddItemModal";
 import InventoryControls from "../components/dashboard/InventoryControls";
 import { useInventory } from "../hooks/useInventory";
 import { Plus } from "lucide-react";
+
+// Utility function to decode JWT and extract username claim
+function getUsernameFromToken(token) {
+  if (!token) return null;
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.username || null;
+  } catch {
+    return null;
+  }
+}
 
 // Dashboard page: displays inventory table and add item modal, manages inventory state
 export default function Dashboard({ token, setToken }) {
@@ -25,6 +36,9 @@ export default function Dashboard({ token, setToken }) {
     handleRefresh,
     handleExport,
   } = useInventory(token);
+
+  // Extract username from token
+  const username = useMemo(() => getUsernameFromToken(token), [token]);
 
   // State for visible fields (lifted from InventoryTable)
   const [visibleFields, setVisibleFields] = useState(items.length > 0 ? Object.keys(items[0]) : []);
@@ -59,10 +73,25 @@ export default function Dashboard({ token, setToken }) {
   // Render dashboard with inventory table, inventory controrls and add item modal
   return (
     <div>
-      {/* Header with title and sign out button */}
+      {/* Header with title, username, and sign out button */}
       <Group justify="space-between" mb="md">
         <Title order={2}>Dashboard</Title>
         <Group>
+          {/* Show username */}
+          {username && (
+            <Button
+              variant="subtle"
+              disabled
+              style={{
+                cursor: "default",
+                color: "var(--mantine-color-gray-6)",
+              }}
+            >
+              {username}
+            </Button>
+          )}
+
+          {/* Sign out button */}
           <Button
             variant="outline"
             color="red"
