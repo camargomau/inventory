@@ -29,7 +29,7 @@ export default function InventoryControls({
       <Menu shadow="md" width={200} closeOnItemClick={false}>
         <Menu.Target>
           <Button variant="outline" size="xs" leftSection={<Eye size={16} />}>
-            Show/Hide Fields
+            Fields
           </Button>
         </Menu.Target>
         <Menu.Dropdown>
