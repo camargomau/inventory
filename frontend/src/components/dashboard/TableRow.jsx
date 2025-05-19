@@ -60,7 +60,6 @@ export default function TableRow({
           position: "sticky",
           right: 0,
           background: "var(--mantine-primary-color-0)",
-          zIndex: 1,
           boxShadow: "-1px 0 0 0 var(--mantine-primary-color-7)",
           color: "var(--mantine-primary-color-9)",
         }}

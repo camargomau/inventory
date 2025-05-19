@@ -58,7 +58,7 @@ export default function InventoryTable({
 
   // Render inventory table with controls and rows
   return (
-    <ScrollArea>
+    <ScrollArea style={{ height: "calc(100vh - 145px)" }}>
       <Table striped highlightOnHover withTableBorder style={{ minWidth: 700 }}>
         <Table.Thead>
           <Table.Tr>
@@ -81,9 +81,10 @@ export default function InventoryTable({
                 position: "sticky",
                 right: 0,
                 background: "var(--mantine-primary-color-1)",
-                zIndex: 2,
                 boxShadow: "-1px 0 0 var(--mantine-primary-color-7)",
                 color: "var(--mantine-primary-color-9)",
+                width: 95,
+                minWidth: 95
               }}
             >
               Actions
