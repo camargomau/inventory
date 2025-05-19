@@ -97,7 +97,8 @@ export default function AddItemModal({ opened, onClose, onAdd }) {
             label="Paste JSON"
             value={json}
             onChange={(e) => setJson(e.target.value)}
-            minRows={6}
+            minRows={10}
+            autosize
           />
         </Tabs.Panel>
       </Tabs>
