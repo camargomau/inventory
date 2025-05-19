@@ -126,6 +126,33 @@ public class ItemService {
 		return response;
 	}
 
+	// Retrieves all deleted items from the inventory
+	// Returns a List of ItemResponse DTOs
+	public List<ItemResponse> getDeletedItems() {
+		return itemRepository.findAllByAvailableFalse().stream()
+				.map(this::toResponse)
+				.collect(Collectors.toList());
+	}
+
+	// Restores a deleted item (sets available = true)
+	// Returns an ItemResponse DTO for the restored item
+	public ItemResponse restoreItem(Integer id) {
+		Item item = itemRepository.findByItemIdAndAvailableFalse(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Deleted item not found with id: " + id));
+		item.setAvailable(true);
+		Item restored = itemRepository.save(item);
+		// Log operation
+		Operation op = Operation.builder()
+				.user(getCurrentUser())
+				.item(restored)
+				.operationType(Operation.OperationType.update)
+				.quantityBefore(0)
+				.quantityAfter(restored.getQuantity())
+				.build();
+		operationRepository.save(op);
+		return toResponse(restored);
+	}
+
 	// Converts an Item entity to an ItemResponse DTO
 	private ItemResponse toResponse(Item item) {
 		return ItemResponse.builder()

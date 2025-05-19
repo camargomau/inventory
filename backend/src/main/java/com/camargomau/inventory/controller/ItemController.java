@@ -50,4 +50,16 @@ public class ItemController {
 		ItemResponse deleted = itemService.deleteItemAndReturn(id);
 		return ResponseEntity.ok(deleted);
 	}
+
+	// GET /api/items/deleted returns all deleted items
+	@GetMapping("/deleted")
+	public List<ItemResponse> getDeletedItems() {
+		return itemService.getDeletedItems();
+	}
+
+	// PUT /api/items/{id}/restore restores a deleted item
+	@PutMapping("/{id}/restore")
+	public ItemResponse restoreItem(@PathVariable Integer id) {
+		return itemService.restoreItem(id);
+	}
 }

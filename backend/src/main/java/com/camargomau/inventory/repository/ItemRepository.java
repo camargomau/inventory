@@ -13,4 +13,6 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	Optional<Item> findByItemId(Integer itemId);
 	List<Item> findAllByAvailableTrue();
 	Optional<Item> findByItemIdAndAvailableTrue(Integer itemId);
+	List<Item> findAllByAvailableFalse();
+	Optional<Item> findByItemIdAndAvailableFalse(Integer itemId);
 }
