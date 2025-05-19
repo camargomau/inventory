@@ -10,6 +10,7 @@ export default function TableCell({
   setEditRowData,
   isDeleted,
 }) {
+  // Render editable input for editable fields
   if (isEditing && !["id", "ID", "_id", "itemId", "createdAt", "sku"].includes(field)) {
     return typeof editRowData[field] === "number" ? (
       <NumberInput
@@ -39,6 +40,7 @@ export default function TableCell({
       />
     );
   }
+  // Render formatted date for createdAt field
   if (field === "createdAt") {
     return (
       <Text
@@ -49,6 +51,7 @@ export default function TableCell({
       </Text>
     );
   }
+  // Render value as text (with strikethrough if deleted)
   return (
     <Text
       span

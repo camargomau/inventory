@@ -15,18 +15,22 @@ export default function TableRowActions({
   confirmDeleteOpen,
   setConfirmDeleteOpen,
 }) {
+  // Render action icons for editing, deleting, confirming, and canceling
   return isEditing ? (
     <>
+      {/* Confirm edit button */}
       <Tooltip label="Confirm">
         <ActionIcon color="green" variant="light" onClick={() => setConfirmEditOpen(true)}>
           <Check size={16} />
         </ActionIcon>
       </Tooltip>
+      {/* Cancel edit button */}
       <Tooltip label="Cancel">
         <ActionIcon color="gray" variant="light" onClick={onCancelEdit}>
           <X size={16} />
         </ActionIcon>
       </Tooltip>
+      {/* Confirm edit modal */}
       <ConfirmModal
         opened={confirmEditOpen}
         onClose={() => setConfirmEditOpen(false)}
@@ -38,16 +42,19 @@ export default function TableRowActions({
     </>
   ) : (
     <>
+      {/* Edit button */}
       <Tooltip label="Edit">
         <ActionIcon color="blue" variant="light" onClick={onEditClick} disabled={isDeleted}>
           <Pencil size={16} />
         </ActionIcon>
       </Tooltip>
+      {/* Delete button */}
       <Tooltip label="Delete">
         <ActionIcon color="red" variant="light" onClick={() => setConfirmDeleteOpen(true)} disabled={isDeleted}>
           <Trash2 size={16} />
         </ActionIcon>
       </Tooltip>
+      {/* Confirm delete modal */}
       <ConfirmModal
         opened={confirmDeleteOpen}
         onClose={() => setConfirmDeleteOpen(false)}

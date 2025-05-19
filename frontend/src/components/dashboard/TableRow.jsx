@@ -18,12 +18,15 @@ export default function TableRow({
   setEditRowData,
   editRowData,
 }) {
+  // Get row id from item
   const id = item.itemId || item.id || item._id || item.ID;
+  // Is this row being edited?
   const isEditing = editRowId === id;
+  // State for confirmation modals
   const [confirmEditOpen, setConfirmEditOpen] = useState(false);
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
 
-  // Row color logic
+  // Row color logic for edited, deleted, or added rows
   const getRowStyle = () => {
     if (isDeleted) return { background: "#ffeaea", textDecoration: "line-through" };
     if (isAdded) return { background: "#eaffea" };
@@ -31,8 +34,10 @@ export default function TableRow({
     return {};
   };
 
+  // Render table row with cells and actions
   return (
     <Table.Tr key={id} style={getRowStyle()}>
+      {/* Render each cell for visible fields */}
       {fields
         .filter((field) => visibleFields.includes(field))
         .map((field) => (
@@ -49,6 +54,7 @@ export default function TableRow({
         ))}
       <Table.Td>
         <Group gap="xs" wrap="nowrap">
+          {/* Row action buttons (edit/delete/confirm/cancel) */}
           <TableRowActions
             isEditing={isEditing}
             isDeleted={isDeleted}

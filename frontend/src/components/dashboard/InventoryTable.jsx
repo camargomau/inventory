@@ -4,7 +4,7 @@ import InventoryControls from "./InventoryControls";
 import TableRow from "./TableRow";
 import { FIELD_LABELS, getFields } from "../../utils/tableUtils";
 
-// InventoryTable displays the inventory items in a table with sorting, field toggles, and inline editing.
+// InventoryTable displays the inventory items in a table with sorting, field toggles, and inline editing
 export default function InventoryTable({
   items,
   onEdit,
@@ -17,9 +17,12 @@ export default function InventoryTable({
 }) {
   // Always recalculate fields when items change
   const fields = getFields(items);
+  // State for visible fields
   const [visibleFields, setVisibleFields] = useState(fields);
+  // State for sorting
   const [sortField, setSortField] = useState(null);
   const [sortAsc, setSortAsc] = useState(true);
+  // State for editing rows
   const [editRowId, setEditRowId] = useState(null);
   const [editRowData, setEditRowData] = useState({});
 
@@ -28,7 +31,7 @@ export default function InventoryTable({
     setVisibleFields(getFields(items));
   }, [items]);
 
-  // Field visibility toggle
+  // Field visibility toggle handler
   const handleFieldToggle = (field) => {
     setVisibleFields((fields) =>
       fields.includes(field)
@@ -37,7 +40,7 @@ export default function InventoryTable({
     );
   };
 
-  // Sorting
+  // Sorting handler
   const handleSort = (field) => {
     if (sortField === field) {
       setSortAsc((asc) => !asc);
@@ -66,6 +69,7 @@ export default function InventoryTable({
     );
   }
 
+  // Render inventory table with controls and rows
   return (
     <ScrollArea>
       <InventoryControls
@@ -78,6 +82,7 @@ export default function InventoryTable({
       <Table striped highlightOnHover withTableBorder>
         <Table.Thead>
           <Table.Tr>
+            {/* Render table headers for visible fields */}
             {fields
               .filter((field) => visibleFields.includes(field))
               .map((field) => (
@@ -94,6 +99,7 @@ export default function InventoryTable({
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
+          {/* Render each inventory row */}
           {displayItems.map((item) => {
             const id = item.itemId || item.id || item._id || item.ID;
             return (

@@ -11,8 +11,11 @@ import {
   Tabs,
 } from "@mantine/core";
 
+// Modal for adding a new inventory item (form or JSON)
 export default function AddItemModal({ opened, onClose, onAdd, error }) {
+  // State for tab selection (form/json)
   const [tab, setTab] = useState("form");
+  // State for form fields
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -20,13 +23,17 @@ export default function AddItemModal({ opened, onClose, onAdd, error }) {
     price: 0,
     quantity: 0,
   });
+  // State for JSON input
   const [json, setJson] = useState("");
+  // Local error state
   const [localError, setLocalError] = useState("");
 
+  // Handle changes in form fields
   const handleFormChange = (field, value) => {
     setForm((f) => ({ ...f, [field]: value }));
   };
 
+  // Handle submit for both form and JSON modes
   const handleSubmit = () => {
     setLocalError("");
     if (tab === "form") {
@@ -45,14 +52,17 @@ export default function AddItemModal({ opened, onClose, onAdd, error }) {
     }
   };
 
+  // Render modal with form and JSON tabs
   return (
     <Modal opened={opened} onClose={onClose} title="Add New Item" centered>
+      {/* Tabs for switching between form and JSON input */}
       <Tabs value={tab} onChange={setTab}>
         <Tabs.List>
           <Tabs.Tab value="form">Form</Tabs.Tab>
           <Tabs.Tab value="json">Paste JSON</Tabs.Tab>
         </Tabs.List>
         <Tabs.Panel value="form" pt="xs">
+          {/* Form fields for item details */}
           <Stack>
             <TextInput
               label="Name"
@@ -89,6 +99,7 @@ export default function AddItemModal({ opened, onClose, onAdd, error }) {
           </Stack>
         </Tabs.Panel>
         <Tabs.Panel value="json" pt="xs">
+          {/* JSON input for bulk add */}
           <Textarea
             label="Paste JSON"
             value={json}
@@ -98,11 +109,13 @@ export default function AddItemModal({ opened, onClose, onAdd, error }) {
           />
         </Tabs.Panel>
       </Tabs>
+      {/* Show error message if present */}
       {(localError || error) && (
         <Text color="red" size="sm" mt="sm">
           {localError || error}
         </Text>
       )}
+      {/* Action buttons */}
       <Group mt="md" justify="flex-end">
         <Button variant="default" onClick={onClose}>
           Cancel
