@@ -22,7 +22,7 @@ export default function TableRow({
   deletedView = false,
 }) {
   // Get row id from item
-  const id = item.itemId || item.id || item._id || item.ID;
+  const id = item.itemId;
   // Is this row being edited?
   const isEditing = editRowId === id;
   // State for confirmation modal: { open: boolean, type: 'edit' | 'delete' | 'restore' | null }

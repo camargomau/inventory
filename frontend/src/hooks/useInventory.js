@@ -45,7 +45,7 @@ export function useInventory(token) {
     try {
       const newItem = await addItem(item, token);
       setItems((prev) => [...prev, newItem]);
-      setAddedIds((prev) => [...prev, newItem.id || newItem.itemId || newItem._id || newItem.ID]);
+      setAddedIds((prev) => [...prev, newItem.itemId]);
       setAddModalOpen(false);
     } catch (err) {
       // Friendlier error for duplicate SKU
@@ -62,7 +62,7 @@ export function useInventory(token) {
   const handleEdit = async (id, newData) => {
     await updateItem(id, newData, token);
     setItems((prev) =>
-      prev.map((item) => (item.id === id || item.itemId === id || item._id === id || item.ID === id ? { ...item, ...newData } : item))
+      prev.map((item) => (item.itemId === id ? { ...item, ...newData } : item))
     );
     setEditedIds((prev) => [...new Set([...prev, id])]);
   };

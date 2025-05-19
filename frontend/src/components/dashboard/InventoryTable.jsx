@@ -94,7 +94,7 @@ export default function InventoryTable({
         <Table.Tbody>
           {/* Render each inventory row */}
           {displayItems.map((item) => {
-            const id = item.itemId || item.id || item._id || item.ID;
+            const id = item.itemId;
             return (
               <TableRow
                 key={id}

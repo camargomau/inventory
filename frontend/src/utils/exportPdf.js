@@ -10,7 +10,7 @@ export function exportInventoryPdf(items, fields, rowStyles) {
     fields.map((field) => item[field])
   );
   const rowOptions = items.map((item) => {
-    const id = item.itemId || item.id || item._id || item.ID;
+    const id = item.itemId;
     const style = rowStyles ? rowStyles(id) : {};
     let row = {};
     if (style.background) row.fillColor = style.background.replace("#", "");

@@ -23,8 +23,6 @@ export function formatDate(dateString) {
 // User-friendly names for column names
 export const FIELD_LABELS = {
   itemId: "ID",
-  id: "ID",
-  _id: "ID",
   name: "Name",
   description: "Description",
   sku: "SKU",
