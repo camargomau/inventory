@@ -1,6 +1,6 @@
 import { Center, Loader, Group, Button, Title } from "@mantine/core";
 import InventoryTable from "../components/dashboard/InventoryTable";
-import AddItemModal from "../components/dasboard/AddItemModal";
+import AddItemModal from "../components/dashboard/AddItemModal";
 import { useInventory } from "../hooks/useInventory";
 
 export default function Dashboard({ token, setToken }) {
