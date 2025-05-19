@@ -2,6 +2,7 @@ import { Button, Group, Menu, Checkbox } from "@mantine/core";
 import { Eye, EyeOff, RefreshCw, FileDown } from "lucide-react";
 import { FIELD_LABELS } from "../utils/tableUtils";
 
+// Controls for toggling fields, refreshing, and exporting
 export default function InventoryTableControls({
   fields,
   visibleFields,

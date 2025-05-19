@@ -1,21 +1,8 @@
 import { useState, useEffect } from "react";
-import {
-  Table,
-  Button,
-  Group,
-  Checkbox,
-  Tooltip,
-  ScrollArea,
-  Menu,
-  Text,
-  Eye,
-  EyeOff,
-  RefreshCw,
-  FileDown,
-} from "@mantine/core";
+import { Table, Group, Text, ScrollArea } from "@mantine/core";
+import InventoryTableControls from "./InventoryTableControls";
 import InventoryRow from "./InventoryRow";
 import { FIELD_LABELS, getFields } from "../utils/tableUtils";
-import InventoryTableControls from "./InventoryTableControls";
 
 // InventoryTable displays the inventory items in a table with sorting, field toggles, and inline editing.
 export default function InventoryTable({
@@ -121,8 +108,6 @@ export default function InventoryTable({
                 isAdded={addedIds.includes(id)}
                 onEdit={onEdit}
                 onDelete={onDelete}
-                editedIds={editedIds}
-                deletedIds={deletedIds}
                 setEditRowId={setEditRowId}
                 editRowId={editRowId}
                 setEditRowData={setEditRowData}

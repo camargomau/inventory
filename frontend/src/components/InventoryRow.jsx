@@ -1,18 +1,9 @@
 import { useState } from "react";
-import {
-  Table,
-  Group,
-  ActionIcon,
-  Tooltip,
-  TextInput,
-  NumberInput,
-  Text,
-} from "@mantine/core";
-import { Pencil, Trash2, Check, X } from "lucide-react";
-import ConfirmModal from "./ConfirmModal";
-import { formatDate } from "../utils/tableUtils";
+import { Table, Group } from "@mantine/core";
 import InventoryCell from "./InventoryCell";
+import InventoryRowActions from "./InventoryRowActions";
 
+// Renders a single inventory row, including actions
 export default function InventoryRow({
   item,
   fields,
@@ -22,8 +13,6 @@ export default function InventoryRow({
   isAdded,
   onEdit,
   onDelete,
-  editedIds,
-  deletedIds,
   setEditRowId,
   editRowId,
   setEditRowData,
@@ -31,8 +20,8 @@ export default function InventoryRow({
 }) {
   const id = item.itemId || item.id || item._id || item.ID;
   const isEditing = editRowId === id;
-  const [confirmEditId, setConfirmEditId] = useState(null);
-  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+  const [confirmEditOpen, setConfirmEditOpen] = useState(false);
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
 
   // Row color logic
   const getRowStyle = () => {
@@ -60,77 +49,28 @@ export default function InventoryRow({
         ))}
       <Table.Td>
         <Group gap="xs" wrap="nowrap">
-          {isEditing ? (
-            <>
-              <Tooltip label="Confirm">
-                <ActionIcon
-                  color="green"
-                  variant="light"
-                  onClick={() => setConfirmEditId(id)}
-                >
-                  <Check size={16} />
-                </ActionIcon>
-              </Tooltip>
-              <Tooltip label="Cancel">
-                <ActionIcon
-                  color="gray"
-                  variant="light"
-                  onClick={() => setEditRowId(null)}
-                >
-                  <X size={16} />
-                </ActionIcon>
-              </Tooltip>
-              {/* Confirm edit modal */}
-              <ConfirmModal
-                opened={confirmEditId === id}
-                onClose={() => setConfirmEditId(null)}
-                onConfirm={() => {
-                  onEdit(id, editRowData);
-                  setEditRowId(null);
-                  setConfirmEditId(null);
-                }}
-                title="Confirm edit"
-                message="Are you sure you want to save these changes?"
-                confirmColor="blue"
-              />
-            </>
-          ) : (
-            <>
-              <Tooltip label="Edit">
-                <ActionIcon
-                  color="blue"
-                  variant="light"
-                  onClick={() => {
-                    setEditRowId(id);
-                    setEditRowData(item);
-                  }}
-                  disabled={isDeleted}
-                >
-                  <Pencil size={16} />
-                </ActionIcon>
-              </Tooltip>
-              <Tooltip label="Delete">
-                <ActionIcon
-                  color="red"
-                  variant="light"
-                  onClick={() => setConfirmDeleteId(id)}
-                  disabled={isDeleted}
-                >
-                  <Trash2 size={16} />
-                </ActionIcon>
-              </Tooltip>
-              <ConfirmModal
-                opened={confirmDeleteId === id}
-                onClose={() => setConfirmDeleteId(null)}
-                onConfirm={() => {
-                  onDelete(id);
-                  setConfirmDeleteId(null);
-                }}
-                title="Confirm delete"
-                message="Are you sure you want to delete this item?"
-              />
-            </>
-          )}
+          <InventoryRowActions
+            isEditing={isEditing}
+            isDeleted={isDeleted}
+            onEditClick={() => {
+              setEditRowId(id);
+              setEditRowData(item);
+            }}
+            onDeleteClick={() => {
+              onDelete(id);
+              setConfirmDeleteOpen(false);
+            }}
+            onConfirmEdit={() => {
+              onEdit(id, editRowData);
+              setEditRowId(null);
+              setConfirmEditOpen(false);
+            }}
+            onCancelEdit={() => setEditRowId(null)}
+            confirmEditOpen={confirmEditOpen}
+            setConfirmEditOpen={setConfirmEditOpen}
+            confirmDeleteOpen={confirmDeleteOpen}
+            setConfirmDeleteOpen={setConfirmDeleteOpen}
+          />
         </Group>
       </Table.Td>
     </Table.Tr>
