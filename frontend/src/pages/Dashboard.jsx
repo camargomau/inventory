@@ -54,15 +54,6 @@ export default function Dashboard({ token, setToken }) {
     );
   };
 
-  // Show loader while inventory is loading
-  if (loading) {
-    return (
-      <Center mt="xl">
-        <Loader />
-      </Center>
-    );
-  }
-
   // Render dashboard with inventory table, inventory controrls and add item modal
   return (
     <div style={{ padding: "20px 24px" }}>
@@ -154,6 +145,7 @@ export default function Dashboard({ token, setToken }) {
         visibleFields={visibleFields}
         onFieldToggle={handleFieldToggle}
         deletedView={showDeleted}
+        loading={loading} // Pass loading prop
       />
     </div>
   );
