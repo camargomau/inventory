@@ -5,17 +5,7 @@ import AddItemModal from "../components/dashboard/AddItemModal";
 import InventoryControls from "../components/dashboard/InventoryControls";
 import { useInventory } from "../hooks/useInventory";
 import { Plus } from "lucide-react";
-
-// Utility function to decode JWT and extract username claim
-function getUsernameFromToken(token) {
-  if (!token) return null;
-  try {
-    const payload = JSON.parse(atob(token.split(".")[1]));
-    return payload.username || null;
-  } catch {
-    return null;
-  }
-}
+import { getUsernameFromToken } from "../utils/jwt";
 
 // Dashboard page: displays inventory table and add item modal, manages inventory state
 export default function Dashboard({ token, setToken }) {
