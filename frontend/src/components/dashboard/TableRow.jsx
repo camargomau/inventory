@@ -57,7 +57,7 @@ export default function TableRow({
         style={{
           position: "sticky",
           right: 0,
-          background: "var(--mantine-color-cyan-0)", // Mantine cyan[0] for actions cell
+          background: "var(--mantine-primary-color-0)",
           zIndex: 1,
           boxShadow: "-2px 0 4px -2px rgba(0,0,0,0.05)",
         }}

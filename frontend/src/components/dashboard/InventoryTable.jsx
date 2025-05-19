@@ -79,7 +79,7 @@ export default function InventoryTable({
               style={{
                 position: "sticky",
                 right: 0,
-                background: "var(--mantine-color-cyan-1)", // Mantine cyan[1]
+                background: "var(--mantine-primary-color-1)",
                 zIndex: 2,
                 boxShadow: "-2px 0 4px -2px rgba(0,0,0,0.05)",
               }}
