@@ -4,6 +4,7 @@ import InventoryTable from "../components/dashboard/InventoryTable";
 import AddItemModal from "../components/dashboard/AddItemModal";
 import InventoryControls from "../components/dashboard/InventoryControls";
 import { useInventory } from "../hooks/useInventory";
+import { Plus } from "lucide-react";
 
 // Dashboard page: displays inventory table and add item modal, manages inventory state
 export default function Dashboard({ token, setToken }) {
@@ -68,7 +69,10 @@ export default function Dashboard({ token, setToken }) {
           onRefresh={handleRefresh}
           onExport={handleExport}
         />
-        <Button onClick={() => setAddModalOpen(true)}>
+        <Button
+          onClick={() => setAddModalOpen(true)}
+          leftSection={<Plus size={16} />}
+        >
           Add Item
         </Button>
       </Flex>
