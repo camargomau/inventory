@@ -101,11 +101,12 @@ export default function AddItemModal({ opened, onClose, onAdd, error }) {
         <Tabs.Panel value="json" pt="xs">
           {/* JSON input for bulk add */}
           <Textarea
-            label="Paste JSON"
+            label="Item JSON"
             value={json}
             onChange={(e) => setJson(e.target.value)}
             minRows={10}
             autosize
+            required
           />
         </Tabs.Panel>
       </Tabs>
