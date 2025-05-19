@@ -34,17 +34,11 @@ export default function Dashboard({ token, setToken }) {
   // Extract username from token
   const username = useMemo(() => getUsernameFromToken(token), [token]);
 
-  // State for visible fields (lifted from InventoryTable)
-  const [visibleFields, setVisibleFields] = useState(items.length > 0 ? Object.keys(items[0]) : []);
+  // State for visible fields
+  const [visibleFields, setVisibleFields] = useState(["itemId", "name", "sku", "price", "quantity"]);
 
-  // State for add item modal
-  // 0 to reset the modal every time
+  // State for add item modal reset
   const [addModalKey, setAddModalKey] = useState(0);
-
-  // Update visibleFields when items change (e.g., after adding first item)
-  useEffect(() => {
-    setVisibleFields(items.length > 0 ? Object.keys(items[0]) : []);
-  }, [items]);
 
   // Field visibility toggle handler
   const handleFieldToggle = (field) => {
@@ -147,7 +141,7 @@ export default function Dashboard({ token, setToken }) {
         visibleFields={visibleFields}
         onFieldToggle={handleFieldToggle}
         deletedView={showDeleted}
-        loading={loading} // Pass loading prop
+        loading={loading}
       />
     </div>
   );
