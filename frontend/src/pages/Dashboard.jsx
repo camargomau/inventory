@@ -39,7 +39,7 @@ export default function Dashboard({ token, setToken }) {
       <Group justify="space-between" mb="md">
         <Title order={2}>Inventory Dashboard</Title>
         <Group>
-          <Button onClick={() => setAddModalOpen(true)}>Add New Entry</Button>
+          <Button onClick={() => setAddModalOpen(true)}>Add Item</Button>
         </Group>
       </Group>
       {/* Inventory table with edit/delete/refresh/export */}

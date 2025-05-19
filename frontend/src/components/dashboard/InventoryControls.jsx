@@ -13,11 +13,21 @@ export default function InventoryControls({
   // Render controls for field visibility, refresh, and export
   return (
     <Group mb="sm">
+      {/* Refresh button */}
+      <Button
+        variant="outline"
+        size="xs"
+        leftSection={<RefreshCw size={16} />}
+        onClick={onRefresh}
+      >
+        Refresh
+      </Button>
+
       {/* Field visibility menu */}
       <Menu shadow="md" width={200}>
         <Menu.Target>
           <Button variant="outline" size="xs" leftSection={<Eye size={16} />}>
-            Fields
+            Show/Hide Fields
           </Button>
         </Menu.Target>
         <Menu.Dropdown>
@@ -38,15 +48,7 @@ export default function InventoryControls({
           ))}
         </Menu.Dropdown>
       </Menu>
-      {/* Refresh button */}
-      <Button
-        variant="outline"
-        size="xs"
-        leftSection={<RefreshCw size={16} />}
-        onClick={onRefresh}
-      >
-        Refresh
-      </Button>
+
       {/* Export button */}
       <Button
         variant="outline"
@@ -54,7 +56,7 @@ export default function InventoryControls({
         leftSection={<FileDown size={16} />}
         onClick={onExport}
       >
-        Export PDF
+        Export to PDF
       </Button>
     </Group>
   );
