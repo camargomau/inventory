@@ -1,7 +1,7 @@
 import { Button, Paper, Title, Text, Stack } from "@mantine/core";
 import { AuthInputs } from "./AuthInputs";
 import { AuthToggle } from "./AuthToggle";
-import { useAuthForm } from "../hooks/useAuthForm";
+import { useAuthForm } from "../../hooks/useAuthForm";
 
 export default function AuthForm({ setToken }) {
   // Use custom hook for authentication form logic
