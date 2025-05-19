@@ -11,7 +11,7 @@ import {
   Tabs,
 } from "@mantine/core";
 
-export default function AddItemModal({ opened, onClose, onAdd }) {
+export default function AddItemModal({ opened, onClose, onAdd, error }) {
   const [tab, setTab] = useState("form");
   const [form, setForm] = useState({
     name: "",
@@ -21,30 +21,26 @@ export default function AddItemModal({ opened, onClose, onAdd }) {
     quantity: 0,
   });
   const [json, setJson] = useState("");
-  const [error, setError] = useState("");
+  const [localError, setLocalError] = useState("");
 
   const handleFormChange = (field, value) => {
     setForm((f) => ({ ...f, [field]: value }));
   };
 
   const handleSubmit = () => {
-    setError("");
+    setLocalError("");
     if (tab === "form") {
       if (!form.name || !form.sku || form.price <= 0 || form.quantity < 0) {
-        setError("Please fill all required fields.");
+        setLocalError("Please fill all required fields.");
         return;
       }
       onAdd(form);
-      onClose();
-      setForm({ name: "", description: "", sku: "", price: 0, quantity: 0 });
     } else {
       try {
         const obj = JSON.parse(json);
         onAdd(obj);
-        onClose();
-        setJson("");
       } catch {
-        setError("Invalid JSON.");
+        setLocalError("Invalid JSON.");
       }
     }
   };
@@ -102,9 +98,9 @@ export default function AddItemModal({ opened, onClose, onAdd }) {
           />
         </Tabs.Panel>
       </Tabs>
-      {error && (
+      {(localError || error) && (
         <Text color="red" size="sm" mt="sm">
-          {error}
+          {localError || error}
         </Text>
       )}
       <Group mt="md" justify="flex-end">

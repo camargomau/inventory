@@ -12,6 +12,7 @@ export default function Dashboard({ token, setToken }) {
   const [deletedIds, setDeletedIds] = useState([]);
   const [addedIds, setAddedIds] = useState([]);
   const [addModalOpen, setAddModalOpen] = useState(false);
+  const [addError, setAddError] = useState("");
 
   // Fetch items on mount or refresh
   const fetchItems = async () => {
@@ -34,9 +35,20 @@ export default function Dashboard({ token, setToken }) {
 
   // Add handler
   const handleAdd = async (item) => {
-    const newItem = await addItem(item, token);
-    setItems((prev) => [...prev, newItem]);
-    setAddedIds((prev) => [...prev, newItem.id || newItem.itemId || newItem._id || newItem.ID]);
+    setAddError("");
+    try {
+      const newItem = await addItem(item, token);
+      setItems((prev) => [...prev, newItem]);
+      setAddedIds((prev) => [...prev, newItem.id || newItem.itemId || newItem._id || newItem.ID]);
+      setAddModalOpen(false);
+    } catch (err) {
+      setAddError(
+        err.response?.data?.message ||
+        err.response?.data?.error ||
+        err.message ||
+        "Failed to add item"
+      );
+    }
   };
 
   // Edit handler
@@ -103,8 +115,12 @@ export default function Dashboard({ token, setToken }) {
       />
       <AddItemModal
         opened={addModalOpen}
-        onClose={() => setAddModalOpen(false)}
+        onClose={() => {
+          setAddModalOpen(false);
+          setAddError("");
+        }}
         onAdd={handleAdd}
+        error={addError}
       />
     </div>
   );
