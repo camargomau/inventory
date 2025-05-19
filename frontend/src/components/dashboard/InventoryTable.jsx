@@ -8,6 +8,7 @@ export default function InventoryTable({
   items,
   onEdit,
   onDelete,
+  onRestore,
   onRefresh,
   onExport,
   editedIds = [],
@@ -15,6 +16,7 @@ export default function InventoryTable({
   addedIds = [],
   visibleFields,
   onFieldToggle,
+  deletedView = false,
 }) {
   // Always recalculate fields when items change
   const fields = getFields(items);
@@ -104,11 +106,13 @@ export default function InventoryTable({
                 isAdded={addedIds.includes(id)}
                 onEdit={onEdit}
                 onDelete={onDelete}
+                onRestore={onRestore}
                 setEditRowId={setEditRowId}
                 editRowId={editRowId}
                 setEditRowData={setEditRowData}
                 editRowData={editRowData}
                 actionsSticky={true}
+                deletedView={deletedView}
               />
             );
           })}

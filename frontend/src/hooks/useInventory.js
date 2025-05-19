@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { getItems, addItem, updateItem, deleteItem } from "../api/items";
+import { getItems, addItem, updateItem, deleteItem, restoreItem } from "../api/items";
 import { exportInventoryPdf } from "../utils/exportPdf";
 
-// Handles inventory logic: fetching, adding, editing, deleting, exporting
+// Handles inventory logic: fetching, adding, editing, deleting, exporting, and viewing/restoring deleted items
 // Similar to useAuthForm, this hook manages state and API calls for inventory
 export function useInventory(token) {
   // List of inventory items
@@ -16,12 +16,14 @@ export function useInventory(token) {
   // Modal and error state for adding items
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [addError, setAddError] = useState("");
+  // State for deleted view
+  const [showDeleted, setShowDeleted] = useState(false);
 
   // Fetch items from API on mount or refresh
-  const fetchItems = async () => {
+  const fetchItems = async (deleted = false) => {
     setLoading(true);
     try {
-      const data = await getItems(token);
+      const data = await getItems(token, deleted);
       setItems(data);
       // Reset change trackers on fetch
       setEditedIds([]);
@@ -32,10 +34,10 @@ export function useInventory(token) {
     }
   };
 
-  // Fetch items when hook mounts
+  // Fetch items when hook mounts or showDeleted changes
   useEffect(() => {
-    fetchItems();
-  }, []);
+    fetchItems(showDeleted);
+  }, [showDeleted]);
 
   // Add item handler: calls API, updates state, handles errors
   const handleAdd = async (item) => {
@@ -71,9 +73,18 @@ export function useInventory(token) {
     setDeletedIds((prev) => [...new Set([...prev, id])]);
   };
 
+  // Restore item handler: calls API, updates state
+  const handleRestore = async (id) => {
+    await restoreItem(id, token);
+    fetchItems(true);
+  };
+
+  // Toggle between normal and deleted view
+  const toggleShowDeleted = () => setShowDeleted((v) => !v);
+
   // Refresh handler: re-fetches items
   const handleRefresh = () => {
-    fetchItems();
+    fetchItems(showDeleted);
   };
 
   // Export handler: exports inventory as PDF, styles rows by change type
@@ -108,5 +119,8 @@ export function useInventory(token) {
     handleDelete,
     handleRefresh,
     handleExport,
+    showDeleted,
+    toggleShowDeleted,
+    handleRestore,
   };
 }

@@ -1,13 +1,15 @@
 import { ActionIcon, Tooltip } from "@mantine/core";
-import { Pencil, Trash2, Check, X } from "lucide-react";
+import { Pencil, Trash2, Check, X, RotateCcw } from "lucide-react";
 import ConfirmModal from "./ConfirmModal";
 
-// Edit/delete/confirm/cancel actions for a row
+// Edit/delete/confirm/cancel/restore actions for a row
 export default function TableRowActions({
   isEditing,
   isDeleted,
+  deletedView = false,
   onEditClick,
   onDeleteClick,
+  onRestoreClick,
   onConfirmEdit,
   onCancelEdit,
   confirmEditOpen,
@@ -15,6 +17,27 @@ export default function TableRowActions({
   confirmDeleteOpen,
   setConfirmDeleteOpen,
 }) {
+  if (deletedView) {
+    return (
+      <>
+        {/* Restore button */}
+        <Tooltip label="Restore">
+          <ActionIcon color="blue" variant="light" onClick={() => setConfirmDeleteOpen(true)}>
+            <RotateCcw size={16} />
+          </ActionIcon>
+        </Tooltip>
+        {/* Confirm restore modal */}
+        <ConfirmModal
+          opened={confirmDeleteOpen}
+          onClose={() => setConfirmDeleteOpen(false)}
+          onConfirm={onRestoreClick}
+          title="Restore item"
+          message="Are you sure you want to restore this item?"
+          confirmColor="orange"
+        />
+      </>
+    );
+  }
   // Render action icons for editing, deleting, confirming, and canceling
   return isEditing ? (
     <>

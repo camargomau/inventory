@@ -13,10 +13,13 @@ export default function TableRow({
   isAdded,
   onEdit,
   onDelete,
+  onRestore,
   setEditRowId,
   editRowId,
   setEditRowData,
   editRowData,
+  actionsSticky,
+  deletedView = false,
 }) {
   // Get row id from item
   const id = item.itemId || item.id || item._id || item.ID;
@@ -68,12 +71,17 @@ export default function TableRow({
           <TableRowActions
             isEditing={isEditing}
             isDeleted={isDeleted}
+            deletedView={deletedView}
             onEditClick={() => {
               setEditRowId(id);
               setEditRowData(item);
             }}
             onDeleteClick={() => {
               onDelete(id);
+              setConfirmDeleteOpen(false);
+            }}
+            onRestoreClick={() => {
+              onRestore(id);
               setConfirmDeleteOpen(false);
             }}
             onConfirmEdit={() => {

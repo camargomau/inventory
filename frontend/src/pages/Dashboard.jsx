@@ -4,7 +4,7 @@ import InventoryTable from "../components/dashboard/InventoryTable";
 import AddItemModal from "../components/dashboard/AddItemModal";
 import InventoryControls from "../components/dashboard/InventoryControls";
 import { useInventory } from "../hooks/useInventory";
-import { Plus, User, LogOut } from "lucide-react";
+import { Plus, User, LogOut, Trash2, Package } from "lucide-react";
 import { getUsernameFromToken } from "../utils/jwt";
 
 // Dashboard page: displays inventory table and add item modal, manages inventory state
@@ -25,6 +25,9 @@ export default function Dashboard({ token, setToken }) {
     handleDelete,
     handleRefresh,
     handleExport,
+    showDeleted,
+    toggleShowDeleted,
+    handleRestore,
   } = useInventory(token);
 
   // Extract username from token
@@ -99,25 +102,29 @@ export default function Dashboard({ token, setToken }) {
 
       {/* Controls and Add Item button in the same row */}
       <Flex justify="space-between" align="center" mb="md">
-        { /* Inventory controls for field visibility, refresh, and export */ }
+        { /* Inventory controls for field visibility, refresh, export, and view toggle */ }
         <InventoryControls
           fields={items.length > 0 ? Object.keys(items[0]) : []}
           visibleFields={visibleFields}
           onFieldToggle={handleFieldToggle}
           onRefresh={handleRefresh}
           onExport={handleExport}
+          showDeleted={showDeleted}
+          toggleShowDeleted={toggleShowDeleted}
         />
 
-        {/* Add Item button */}
-        <Button
-          onClick={() => {
-            setAddModalOpen(true);
-            setAddModalKey((k) => k + 1);
-          }}
-          leftSection={<Plus size={16} />}
-        >
-          Add Item
-        </Button>
+        {/* Add Item button, hidden in deleted view */}
+        {!showDeleted && (
+          <Button
+            onClick={() => {
+              setAddModalOpen(true);
+              setAddModalKey((k) => k + 1);
+            }}
+            leftSection={<Plus size={16} />}
+          >
+            Add Item
+          </Button>
+        )}
       </Flex>
 
       {/* Modal for adding a new item */}
@@ -138,6 +145,7 @@ export default function Dashboard({ token, setToken }) {
         items={items}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        onRestore={handleRestore}
         onRefresh={handleRefresh}
         onExport={handleExport}
         editedIds={editedIds}
@@ -145,6 +153,7 @@ export default function Dashboard({ token, setToken }) {
         addedIds={addedIds}
         visibleFields={visibleFields}
         onFieldToggle={handleFieldToggle}
+        deletedView={showDeleted}
       />
     </div>
   );
