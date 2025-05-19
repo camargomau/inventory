@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Center, Loader, Group, Button, Title, Flex } from "@mantine/core";
 import InventoryTable from "../components/dashboard/InventoryTable";
 import AddItemModal from "../components/dashboard/AddItemModal";
@@ -24,6 +25,23 @@ export default function Dashboard({ token, setToken }) {
     handleExport,
   } = useInventory(token);
 
+  // State for visible fields (lifted from InventoryTable)
+  const [visibleFields, setVisibleFields] = useState(items.length > 0 ? Object.keys(items[0]) : []);
+
+  // Update visibleFields when items change (e.g., after adding first item)
+  useEffect(() => {
+    setVisibleFields(items.length > 0 ? Object.keys(items[0]) : []);
+  }, [items]);
+
+  // Field visibility toggle handler
+  const handleFieldToggle = (field) => {
+    setVisibleFields((fields) =>
+      fields.includes(field)
+        ? fields.filter((f) => f !== field)
+        : [...fields, field]
+    );
+  };
+
   // Show loader while inventory is loading
   if (loading) {
     return (
@@ -45,8 +63,8 @@ export default function Dashboard({ token, setToken }) {
       <Flex justify="space-between" align="center" mb="md">
         <InventoryControls
           fields={items.length > 0 ? Object.keys(items[0]) : []}
-          visibleFields={[]}
-          onFieldToggle={() => {}}
+          visibleFields={visibleFields}
+          onFieldToggle={handleFieldToggle}
           onRefresh={handleRefresh}
           onExport={handleExport}
         />
@@ -76,6 +94,8 @@ export default function Dashboard({ token, setToken }) {
         editedIds={editedIds}
         deletedIds={deletedIds}
         addedIds={addedIds}
+        visibleFields={visibleFields}
+        onFieldToggle={handleFieldToggle}
       />
     </div>
   );

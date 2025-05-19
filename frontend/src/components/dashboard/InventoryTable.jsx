@@ -13,11 +13,11 @@ export default function InventoryTable({
   editedIds = [],
   deletedIds = [],
   addedIds = [],
+  visibleFields,
+  onFieldToggle,
 }) {
   // Always recalculate fields when items change
   const fields = getFields(items);
-  // State for visible fields
-  const [visibleFields, setVisibleFields] = useState(fields);
   // State for sorting
   const [sortField, setSortField] = useState(null);
   const [sortAsc, setSortAsc] = useState(true);
@@ -25,20 +25,6 @@ export default function InventoryTable({
   const [editRowId, setEditRowId] = useState(null);
   const [editRowData, setEditRowData] = useState({});
   const [setAddModalOpen] = useState(false);
-
-  // Update visibleFields when items change (e.g., after adding first item)
-  useEffect(() => {
-    setVisibleFields(getFields(items));
-  }, [items]);
-
-  // Field visibility toggle handler
-  const handleFieldToggle = (field) => {
-    setVisibleFields((fields) =>
-      fields.includes(field)
-        ? fields.filter((f) => f !== field)
-        : [...fields, field]
-    );
-  };
 
   // Sorting handler
   const handleSort = (field) => {
