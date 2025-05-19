@@ -58,7 +58,7 @@ export default function InventoryTable({
   // Render inventory table with controls and rows
   return (
     <ScrollArea>
-      <Table striped highlightOnHover withTableBorder>
+      <Table striped highlightOnHover withTableBorder style={{ minWidth: 700 }}>
         <Table.Thead>
           <Table.Tr>
             {/* Render table headers for visible fields */}
@@ -74,7 +74,18 @@ export default function InventoryTable({
                   {sortField === field ? (sortAsc ? " ▲" : " ▼") : ""}
                 </Table.Th>
               ))}
-            <Table.Th>Actions</Table.Th>
+            {/* Actions header with sticky position */}
+            <Table.Th
+              style={{
+                position: "sticky",
+                right: 0,
+                background: "#fff",
+                zIndex: 2,
+                boxShadow: "-2px 0 4px -2px rgba(0,0,0,0.05)",
+              }}
+            >
+              Actions
+            </Table.Th>
           </Table.Tr>
         </Table.Thead>
 
@@ -97,6 +108,7 @@ export default function InventoryTable({
                 editRowId={editRowId}
                 setEditRowData={setEditRowData}
                 editRowData={editRowData}
+                actionsSticky={true}
               />
             );
           })}

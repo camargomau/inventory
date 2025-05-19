@@ -52,7 +52,16 @@ export default function TableRow({
             />
           </Table.Td>
         ))}
-      <Table.Td>
+      {/* Actions cell with sticky position */}
+      <Table.Td
+        style={{
+          position: "sticky",
+          right: 0,
+          background: "#fff",
+          zIndex: 1,
+          boxShadow: "-2px 0 4px -2px rgba(0,0,0,0.05)",
+        }}
+      >
         <Group gap="xs" wrap="nowrap">
           {/* Row action buttons (edit/delete/confirm/cancel) */}
           <TableRowActions
