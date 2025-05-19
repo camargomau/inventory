@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { TokenContext } from "./context/TokenContext";
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
-import { TokenContext } from "./context/TokenContext";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));

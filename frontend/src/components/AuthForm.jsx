@@ -26,7 +26,7 @@ async function handleSubmit(e, username, email, password, mode, setError, setLoa
   setError("");
 
   // Validate register fields if in register mode
-  if (mode === "register" && !validateRegister()) return;
+  if (mode === "register" && !validateRegister(username, password, setError)) return;
   setLoading(true);
 
   try {
