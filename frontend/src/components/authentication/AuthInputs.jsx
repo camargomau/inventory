@@ -16,7 +16,7 @@ export function AuthInputs({
       {mode === "register" && (
         <TextInput
           label="Username"
-          placeholder="bilbobaggins"
+          placeholder="Enter your username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
@@ -28,7 +28,7 @@ export function AuthInputs({
       {/* Email input */}
       <TextInput
         label="Email"
-        placeholder="bilbo@theshire.com"
+        placeholder="Enter your email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
@@ -38,6 +38,7 @@ export function AuthInputs({
       {/* Password input */}
       <PasswordInput
         label="Password"
+        placeholder="Enter your password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required

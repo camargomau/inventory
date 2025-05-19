@@ -13,7 +13,7 @@ export function AuthToggle({ mode, setMode, setError }) {
         }}
       >
         {mode === "login"
-          ? "Not registered yet?"
+          ? "Don't have an account?"
           : "Already have an account?"}
       </Button>
     </Group>

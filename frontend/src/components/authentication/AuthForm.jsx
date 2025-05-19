@@ -25,7 +25,7 @@ export default function AuthForm({ setToken }) {
     <Paper p="md" radius="md" withBorder style={{ maxWidth: 340, margin: "40px auto" }}>
       {/* Title based on mode */}
       <Title order={2} mb="md">
-        {mode === "login" ? "Login" : "Register"}
+        {mode === "login" ? "Log In" : "Register"}
       </Title>
 
       {/* Auth form */}
@@ -50,7 +50,7 @@ export default function AuthForm({ setToken }) {
 
           {/* Submit button */}
           <Button type="submit" fullWidth loading={loading}>
-            {mode === "login" ? "Login" : "Register"}
+            {mode === "login" ? "Log In" : "Register"}
           </Button>
         </Stack>
       </form>
