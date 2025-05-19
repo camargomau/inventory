@@ -11,7 +11,7 @@ export default function TableCell({
   isDeleted,
 }) {
   // Render editable input for editable fields
-  if (isEditing && !["id", "ID", "_id", "itemId", "createdAt", "sku"].includes(field)) {
+  if (isEditing && !["itemId", "createdAt", "sku"].includes(field)) {
     return typeof editRowData[field] === "number" ? (
       <NumberInput
         value={editRowData[field]}
@@ -24,7 +24,7 @@ export default function TableCell({
         size="xs"
         hideControls={false}
         min={0}
-        style={{ minWidth: 90, width: 90 }}
+        style={{ minWidth: 90, width: 90, whiteSpace: "nowrap" }}
       />
     ) : (
       <TextInput
@@ -36,7 +36,7 @@ export default function TableCell({
           }))
         }
         size="xs"
-        style={{ minWidth: 180 }}
+        style={{ minWidth: 180, whiteSpace: "nowrap" }}
       />
     );
   }
@@ -45,7 +45,7 @@ export default function TableCell({
     return (
       <Text
         span
-        style={isDeleted ? { textDecoration: "line-through", color: "var(--mantine-color-red-6)" } : {}}
+        style={{ whiteSpace: "nowrap", ...(isDeleted ? { textDecoration: "line-through", color: "var(--mantine-color-red-6)" } : {}) }}
       >
         {formatDate(value)}
       </Text>
@@ -55,7 +55,7 @@ export default function TableCell({
   return (
     <Text
       span
-      style={isDeleted ? { textDecoration: "line-through", color: "var(--mantine-color-red-6)" } : {}}
+      style={{ whiteSpace: "nowrap", ...(isDeleted ? { textDecoration: "line-through", color: "var(--mantine-color-red-6)" } : {}) }}
     >
       {value}
     </Text>
