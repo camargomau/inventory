@@ -3,13 +3,18 @@ import { login, register } from "../api/auth";
 
 // Handles authentication form logic, including validation
 export function useAuthForm(setToken) {
-  // "login" or "register"
-  // Show login form by default
+  // "login" or "register"; controls which form is shown
+  // Show login by default
   const [mode, setMode] = useState("login");
+  // Stores the user's email input
   const [email, setEmail] = useState("");
+  // Stores the user's password input
   const [password, setPassword] = useState("");
+  // Stores the user's username input (register only)
   const [username, setUsername] = useState("");
+  // Stores error messages to display to the user
   const [error, setError] = useState("");
+ // Indicates if a request is in progress (for loading spinners, etc.)
   const [loading, setLoading] = useState(false);
 
   // Simple client-side validation for register
