@@ -46,12 +46,13 @@ export function useInventory(token) {
       setAddedIds((prev) => [...prev, newItem.id || newItem.itemId || newItem._id || newItem.ID]);
       setAddModalOpen(false);
     } catch (err) {
-      setAddError(
-        err.response?.data?.message ||
-        err.response?.data?.error ||
-        err.message ||
-        "Failed to add item"
-      );
+      // Friendlier error for duplicate SKU
+      const apiMsg = err.response?.data?.message || err.response?.data?.error || err.message || "Failed to add item";
+      if (apiMsg && /sku.*exist|duplicate.*sku|unique.*sku|sku.*already/i.test(apiMsg)) {
+        setAddError("SKU already exists. Please use a unique SKU.");
+      } else {
+        setAddError(apiMsg);
+      }
     }
   };
 
