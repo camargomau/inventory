@@ -201,23 +201,27 @@ export default function InventoryTable({
                   <Group gap="xs">
                     {isEditing ? (
                       <>
-                        <ActionIcon
-                          color="green"
-                          variant="light"
-                          onClick={() => {
-                            onEdit(id, editRowData);
-                            setEditRowId(null);
-                          }}
-                        >
-                          <Check size={16} />
-                        </ActionIcon>
-                        <ActionIcon
-                          color="gray"
-                          variant="light"
-                          onClick={() => setEditRowId(null)}
-                        >
-                          <X size={16} />
-                        </ActionIcon>
+                        <Tooltip label="Confirm">
+                          <ActionIcon
+                            color="green"
+                            variant="light"
+                            onClick={() => {
+                              onEdit(id, editRowData);
+                              setEditRowId(null);
+                            }}
+                          >
+                            <Check size={16} />
+                          </ActionIcon>
+                        </Tooltip>
+                        <Tooltip label="Cancel">
+                          <ActionIcon
+                            color="gray"
+                            variant="light"
+                            onClick={() => setEditRowId(null)}
+                          >
+                            <X size={16} />
+                          </ActionIcon>
+                        </Tooltip>
                       </>
                     ) : (
                       <>
