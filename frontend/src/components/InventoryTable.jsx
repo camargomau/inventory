@@ -173,7 +173,7 @@ export default function InventoryTable({
                   .filter((field) => visibleFields.includes(field))
                   .map((field) => (
                     <Table.Td key={field}>
-                      {isEditing && !["id", "ID", "_id", "itemId", "createdAt"].includes(field) ? (
+                      {isEditing && !["id", "ID", "_id", "itemId", "createdAt", "sku"].includes(field) ? (
                         <TextInput
                           value={editRowData[field]}
                           onChange={(e) =>
