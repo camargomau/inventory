@@ -25,9 +25,8 @@ export default function TableRow({
   const id = item.itemId || item.id || item._id || item.ID;
   // Is this row being edited?
   const isEditing = editRowId === id;
-  // State for confirmation modals
-  const [confirmEditOpen, setConfirmEditOpen] = useState(false);
-  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+  // State for confirmation modal: { open: boolean, type: 'edit' | 'delete' | 'restore' | null }
+  const [confirmModal, setConfirmModal] = useState({ open: false, type: null });
 
   // Row color logic for edited, deleted, or added rows
   const getRowStyle = () => {
@@ -78,22 +77,20 @@ export default function TableRow({
             }}
             onDeleteClick={() => {
               onDelete(id);
-              setConfirmDeleteOpen(false);
+              setConfirmModal({ open: false, type: null });
             }}
             onRestoreClick={() => {
               onRestore(id);
-              setConfirmDeleteOpen(false);
+              setConfirmModal({ open: false, type: null });
             }}
             onConfirmEdit={() => {
               onEdit(id, editRowData);
               setEditRowId(null);
-              setConfirmEditOpen(false);
+              setConfirmModal({ open: false, type: null });
             }}
             onCancelEdit={() => setEditRowId(null)}
-            confirmEditOpen={confirmEditOpen}
-            setConfirmEditOpen={setConfirmEditOpen}
-            confirmDeleteOpen={confirmDeleteOpen}
-            setConfirmDeleteOpen={setConfirmDeleteOpen}
+            confirmModal={confirmModal}
+            setConfirmModal={setConfirmModal}
           />
         </Group>
       </Table.Td>

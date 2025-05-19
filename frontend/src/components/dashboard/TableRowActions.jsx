@@ -12,24 +12,22 @@ export default function TableRowActions({
   onRestoreClick,
   onConfirmEdit,
   onCancelEdit,
-  confirmEditOpen,
-  setConfirmEditOpen,
-  confirmDeleteOpen,
-  setConfirmDeleteOpen,
+  confirmModal,
+  setConfirmModal,
 }) {
   if (deletedView) {
     return (
       <>
         {/* Restore button */}
         <Tooltip label="Restore">
-          <ActionIcon color="blue" variant="light" onClick={() => setConfirmDeleteOpen(true)}>
+          <ActionIcon color="blue" variant="light" onClick={() => setConfirmModal({ open: true, type: 'restore' })}>
             <RotateCcw size={16} />
           </ActionIcon>
         </Tooltip>
         {/* Confirm restore modal */}
         <ConfirmModal
-          opened={confirmDeleteOpen}
-          onClose={() => setConfirmDeleteOpen(false)}
+          opened={confirmModal.open && confirmModal.type === 'restore'}
+          onClose={() => setConfirmModal({ open: false, type: null })}
           onConfirm={onRestoreClick}
           title="Restore item"
           message="Are you sure you want to restore this item?"
@@ -43,7 +41,7 @@ export default function TableRowActions({
     <>
       {/* Confirm edit button */}
       <Tooltip label="Confirm">
-        <ActionIcon color="green" variant="light" onClick={() => setConfirmEditOpen(true)}>
+        <ActionIcon color="green" variant="light" onClick={() => setConfirmModal({ open: true, type: 'edit' })}>
           <Check size={16} />
         </ActionIcon>
       </Tooltip>
@@ -55,8 +53,8 @@ export default function TableRowActions({
       </Tooltip>
       {/* Confirm edit modal */}
       <ConfirmModal
-        opened={confirmEditOpen}
-        onClose={() => setConfirmEditOpen(false)}
+        opened={confirmModal.open && confirmModal.type === 'edit'}
+        onClose={() => setConfirmModal({ open: false, type: null })}
         onConfirm={onConfirmEdit}
         title="Confirm edit"
         message="Are you sure you want to save these changes?"
@@ -73,14 +71,14 @@ export default function TableRowActions({
       </Tooltip>
       {/* Delete button */}
       <Tooltip label="Delete">
-        <ActionIcon color="red" variant="light" onClick={() => setConfirmDeleteOpen(true)} disabled={isDeleted}>
+        <ActionIcon color="red" variant="light" onClick={() => setConfirmModal({ open: true, type: 'delete' })} disabled={isDeleted}>
           <Trash2 size={16} />
         </ActionIcon>
       </Tooltip>
       {/* Confirm delete modal */}
       <ConfirmModal
-        opened={confirmDeleteOpen}
-        onClose={() => setConfirmDeleteOpen(false)}
+        opened={confirmModal.open && confirmModal.type === 'delete'}
+        onClose={() => setConfirmModal({ open: false, type: null })}
         onConfirm={onDeleteClick}
         title="Confirm delete"
         message="Are you sure you want to delete this item?"
