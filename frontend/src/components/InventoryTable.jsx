@@ -24,6 +24,27 @@ import {
 } from "lucide-react";
 import ConfirmModal from "./ConfirmModal";
 
+function formatDate(dateString) {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  if (isNaN(date)) return dateString;
+  const pad = (n) => n.toString().padStart(2, "0");
+  return (
+    date.getFullYear() +
+    "-" +
+    pad(date.getMonth() + 1) +
+    "-" +
+    pad(date.getDate()) +
+    " (UTC " +
+    pad(date.getHours()) +
+    ":" +
+    pad(date.getMinutes()) +
+    ":" +
+    pad(date.getSeconds()) +
+    ")"
+  );
+}
+
 // Map internal field names to user-friendly column names
 const FIELD_LABELS = {
   itemId: "ID",
@@ -215,6 +236,17 @@ export default function InventoryTable({
                             style={{ minWidth: 180 }}
                           />
                         )
+                      ) : field === "createdAt" ? (
+                        <Text
+                          span
+                          style={
+                            deletedIds.includes(id)
+                              ? { textDecoration: "line-through", color: "#c00" }
+                              : {}
+                          }
+                        >
+                          {formatDate(item[field])}
+                        </Text>
                       ) : (
                         <Text
                           span
