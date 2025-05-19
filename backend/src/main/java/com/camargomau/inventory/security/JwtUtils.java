@@ -31,9 +31,9 @@ public class JwtUtils {
 
 	// Generates a new JWT token for the given subject (username)
 	// Uses the data we've recopilated/defined so far
-	public String generateToken(String subject) {
-		// No custom claims
+	public String generateToken(String subject, String username) {
 		Map<String, Object> claims = new HashMap<>();
+		claims.put("username", username);
 		long now = System.currentTimeMillis();
 		return Jwts.builder()
 				.claims(claims)
@@ -50,6 +50,14 @@ public class JwtUtils {
 				.parseSignedClaims(token)
 				.getPayload()
 				.getSubject();
+	}
+
+	// Extracts the username claim from the given JWT token
+	public String extractUsernameClaim(String token) {
+		return (String) Jwts.parser().verifyWith(getKey()).build()
+				.parseSignedClaims(token)
+				.getPayload()
+				.get("username");
 	}
 
 	// Validates the given JWT token (checks signature and expiration)

@@ -46,8 +46,8 @@ public class AuthService {
 				.build();
 		userRepository.save(user);
 
-		// Generate JWT token for the new user
-		String token = jwtUtils.generateToken(user.getEmail());
+		// Generate JWT token for the new user (include username as claim)
+		String token = jwtUtils.generateToken(user.getEmail(), user.getUsername());
 		return new AuthResponse(token);
 	}
 
@@ -62,8 +62,12 @@ public class AuthService {
 			throw new RuntimeException("Invalid credentials");
 		}
 
-		// Generate JWT token for the authenticated user
-		String token = jwtUtils.generateToken(request.getEmail());
+		// Fetch user to get username for claim
+		User user = userRepository.findByEmail(request.getEmail())
+			.orElseThrow(() -> new RuntimeException("User not found"));
+
+		// Generate JWT token for the authenticated user (include username as claim)
+		String token = jwtUtils.generateToken(user.getEmail(), user.getUsername());
 		return new AuthResponse(token);
 	}
 }
