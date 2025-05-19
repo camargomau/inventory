@@ -1,0 +1,56 @@
+import { Button, Group, Menu, Checkbox } from "@mantine/core";
+import { Eye, EyeOff, RefreshCw, FileDown } from "lucide-react";
+import { FIELD_LABELS } from "../utils/tableUtils";
+
+export default function InventoryTableControls({
+  fields,
+  visibleFields,
+  onFieldToggle,
+  onRefresh,
+  onExport,
+}) {
+  return (
+    <Group mb="sm">
+      <Menu shadow="md" width={200}>
+        <Menu.Target>
+          <Button variant="outline" size="xs" leftSection={<Eye size={16} />}>
+            Fields
+          </Button>
+        </Menu.Target>
+        <Menu.Dropdown>
+          {fields.map((field) => (
+            <Menu.Item
+              key={field}
+              leftSection={
+                visibleFields.includes(field) ? <Eye size={16} /> : <EyeOff size={16} />
+              }
+            >
+              <Checkbox
+                label={FIELD_LABELS[field] || field}
+                checked={visibleFields.includes(field)}
+                onChange={() => onFieldToggle(field)}
+                size="xs"
+              />
+            </Menu.Item>
+          ))}
+        </Menu.Dropdown>
+      </Menu>
+      <Button
+        variant="outline"
+        size="xs"
+        leftSection={<RefreshCw size={16} />}
+        onClick={onRefresh}
+      >
+        Refresh
+      </Button>
+      <Button
+        variant="outline"
+        size="xs"
+        leftSection={<FileDown size={16} />}
+        onClick={onExport}
+      >
+        Export PDF
+      </Button>
+    </Group>
+  );
+}

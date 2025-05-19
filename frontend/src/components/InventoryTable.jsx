@@ -15,6 +15,7 @@ import {
 } from "@mantine/core";
 import InventoryRow from "./InventoryRow";
 import { FIELD_LABELS, getFields } from "../utils/tableUtils";
+import InventoryTableControls from "./InventoryTableControls";
 
 // InventoryTable displays the inventory items in a table with sorting, field toggles, and inline editing.
 export default function InventoryTable({
@@ -81,49 +82,13 @@ export default function InventoryTable({
 
   return (
     <ScrollArea>
-      <Group mb="sm">
-        {/* Field visibility toggles */}
-        <Menu shadow="md" width={200}>
-          <Menu.Target>
-            <Button variant="outline" size="xs" leftSection={<Eye size={16} />}>
-              Fields
-            </Button>
-          </Menu.Target>
-          <Menu.Dropdown>
-            {fields.map((field) => (
-              <Menu.Item
-                key={field}
-                leftSection={
-                  visibleFields.includes(field) ? <Eye size={16} /> : <EyeOff size={16} />
-                }
-              >
-                <Checkbox
-                  label={FIELD_LABELS[field] || field}
-                  checked={visibleFields.includes(field)}
-                  onChange={() => handleFieldToggle(field)}
-                  size="xs"
-                />
-              </Menu.Item>
-            ))}
-          </Menu.Dropdown>
-        </Menu>
-        <Button
-          variant="outline"
-          size="xs"
-          leftSection={<RefreshCw size={16} />}
-          onClick={onRefresh}
-        >
-          Refresh
-        </Button>
-        <Button
-          variant="outline"
-          size="xs"
-          leftSection={<FileDown size={16} />}
-          onClick={onExport}
-        >
-          Export PDF
-        </Button>
-      </Group>
+      <InventoryTableControls
+        fields={fields}
+        visibleFields={visibleFields}
+        onFieldToggle={handleFieldToggle}
+        onRefresh={onRefresh}
+        onExport={onExport}
+      />
       <Table striped highlightOnHover withTableBorder>
         <Table.Thead>
           <Table.Tr>

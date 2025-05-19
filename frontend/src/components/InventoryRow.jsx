@@ -11,6 +11,7 @@ import {
 import { Pencil, Trash2, Check, X } from "lucide-react";
 import ConfirmModal from "./ConfirmModal";
 import { formatDate } from "../utils/tableUtils";
+import InventoryCell from "./InventoryCell";
 
 export default function InventoryRow({
   item,
@@ -47,57 +48,14 @@ export default function InventoryRow({
         .filter((field) => visibleFields.includes(field))
         .map((field) => (
           <Table.Td key={field}>
-            {isEditing && !["id", "ID", "_id", "itemId", "createdAt", "sku"].includes(field) ? (
-              typeof editRowData[field] === "number" ? (
-                <NumberInput
-                  value={editRowData[field]}
-                  onChange={(value) =>
-                    setEditRowData((data) => ({
-                      ...data,
-                      [field]: value ?? 0,
-                    }))
-                  }
-                  size="xs"
-                  hideControls={false}
-                  min={0}
-                  style={{ minWidth: 90, width: 90 }}
-                />
-              ) : (
-                <TextInput
-                  value={editRowData[field]}
-                  onChange={(e) =>
-                    setEditRowData((data) => ({
-                      ...data,
-                      [field]: e.target.value,
-                    }))
-                  }
-                  size="xs"
-                  style={{ minWidth: 180 }}
-                />
-              )
-            ) : field === "createdAt" ? (
-              <Text
-                span
-                style={
-                  isDeleted
-                    ? { textDecoration: "line-through", color: "#c00" }
-                    : {}
-                }
-              >
-                {formatDate(item[field])}
-              </Text>
-            ) : (
-              <Text
-                span
-                style={
-                  isDeleted
-                    ? { textDecoration: "line-through", color: "#c00" }
-                    : {}
-                }
-              >
-                {item[field]}
-              </Text>
-            )}
+            <InventoryCell
+              field={field}
+              value={item[field]}
+              isEditing={isEditing}
+              editRowData={editRowData}
+              setEditRowData={setEditRowData}
+              isDeleted={isDeleted}
+            />
           </Table.Td>
         ))}
       <Table.Td>
