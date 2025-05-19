@@ -60,7 +60,7 @@ export default function InventoryTable({
   return (
     <ScrollArea style={{ height: "calc(100vh - 145px)" }}>
       <Table striped highlightOnHover withTableBorder style={{ minWidth: 700 }}>
-        <Table.Thead>
+        <Table.Thead style={{ position: "sticky", top: 0 }}>
           <Table.Tr>
             {/* Render table headers for visible fields */}
             {fields
@@ -69,7 +69,7 @@ export default function InventoryTable({
                 <Table.Th
                   key={field}
                   onClick={() => handleSort(field)}
-                  style={{ cursor: "pointer", userSelect: "none" }}
+                  style={{ background: "var(--mantine-color-gray-3)" }}
                 >
                   {FIELD_LABELS[field] || field}
                   {sortField === field ? (sortAsc ? " ▲" : " ▼") : ""}

@@ -29,7 +29,7 @@ export default function InventoryControls({
       <Menu shadow="md" width={200} closeOnItemClick={false}>
         <Menu.Target>
           <Button variant="outline" size="xs" leftSection={<Eye size={16} />}>
-            Fields
+            Show/Hide
           </Button>
         </Menu.Target>
         <Menu.Dropdown>
@@ -58,7 +58,7 @@ export default function InventoryControls({
         leftSection={<FileDown size={16} />}
         onClick={onExport}
       >
-        Export to PDF
+        PDF
       </Button>
 
       {/* Toggle between normal and deleted view */}
