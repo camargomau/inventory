@@ -1,5 +1,5 @@
 import { Paper } from "@mantine/core";
-import AuthForm from "../components/authentication/AuthForm";
+import AuthForm from "../components/AuthForm";
 
 // Landing page: renders authentication form
 export default function LandingPage() {
