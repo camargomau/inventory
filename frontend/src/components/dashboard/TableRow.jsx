@@ -60,7 +60,7 @@ export default function TableRow({
       <Table.Td
         style={{
           position: "sticky",
-          right: 0,
+          right: -1,
           background: "var(--mantine-primary-color-0)",
           boxShadow: "-1px 0 0 0 var(--mantine-primary-color-7)",
           color: "var(--mantine-primary-color-9)",
