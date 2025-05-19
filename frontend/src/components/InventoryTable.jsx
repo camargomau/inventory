@@ -199,7 +199,7 @@ export default function InventoryTable({
                     </Table.Td>
                   ))}
                 <Table.Td>
-                  <Group gap="xs">
+                  <Group gap="xs" wrap="nowrap">
                     {isEditing ? (
                       <>
                         <Tooltip label="Confirm">
