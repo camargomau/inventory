@@ -24,6 +24,19 @@ import {
 } from "lucide-react";
 import ConfirmModal from "./ConfirmModal";
 
+// Map internal field names to user-friendly column names
+const FIELD_LABELS = {
+  itemId: "ID",
+  id: "ID",
+  _id: "ID",
+  name: "Name",
+  description: "Description",
+  sku: "SKU",
+  price: "Price",
+  quantity: "Quantity",
+  createdAt: "Creation Date",
+};
+
 function getFields(items) {
   if (!items || items.length === 0) return [];
   return Object.keys(items[0]);
@@ -120,7 +133,7 @@ export default function InventoryTable({
                 }
               >
                 <Checkbox
-                  label={field}
+                  label={FIELD_LABELS[field] || field}
                   checked={visibleFields.includes(field)}
                   onChange={() => handleFieldToggle(field)}
                   size="xs"
@@ -157,7 +170,7 @@ export default function InventoryTable({
                   onClick={() => handleSort(field)}
                   style={{ cursor: "pointer", userSelect: "none" }}
                 >
-                  {field}
+                  {FIELD_LABELS[field] || field}
                   {sortField === field ? (sortAsc ? " ▲" : " ▼") : ""}
                 </Table.Th>
               ))}
