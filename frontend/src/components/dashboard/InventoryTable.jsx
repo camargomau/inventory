@@ -53,7 +53,7 @@ export default function InventoryTable({
   if (items.length === 0) {
     return (
       <Group position="center" mt="md">
-        <Text color="dimmed">No items in inventory yet.</Text>
+        <Text color="dimmed">No items.</Text>
       </Group>
     );
   }
