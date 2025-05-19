@@ -6,11 +6,7 @@ export default function Header() {
   const {
     username,
     setToken,
-    showDeleted,
-    addModalKey,
-    addModalOpen,
-    handleAdd,
-    addError
+    showDeleted
   } = useInventory();
 
   return (

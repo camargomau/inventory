@@ -44,10 +44,6 @@ export default function NewDashboard() {
     username,
     setToken,
     showDeleted,
-    addModalKey,
-    addModalOpen,
-    handleAdd,
-    addError
   }
 
   return (
