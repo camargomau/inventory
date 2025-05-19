@@ -4,7 +4,7 @@ import InventoryTable from "../components/dashboard/InventoryTable";
 import AddItemModal from "../components/dashboard/AddItemModal";
 import InventoryControls from "../components/dashboard/InventoryControls";
 import { useInventory } from "../hooks/useInventory";
-import { Plus } from "lucide-react";
+import { Plus, User, LogOut } from "lucide-react";
 import { getUsernameFromToken } from "../utils/jwt";
 
 // Dashboard page: displays inventory table and add item modal, manages inventory state
@@ -72,6 +72,7 @@ export default function Dashboard({ token, setToken }) {
             <Button
               variant="subtle"
               disabled
+              leftSection={<User size={16} />}
               style={{
                 cursor: "default",
                 color: "var(--mantine-color-gray-6)",
@@ -85,6 +86,7 @@ export default function Dashboard({ token, setToken }) {
           <Button
             variant="outline"
             color="red"
+            leftSection={<LogOut size={16} />}
             onClick={() => {
               localStorage.removeItem("token");
               setToken(null);
@@ -97,6 +99,7 @@ export default function Dashboard({ token, setToken }) {
 
       {/* Controls and Add Item button in the same row */}
       <Flex justify="space-between" align="center" mb="md">
+        { /* Inventory controls for field visibility, refresh, and export */ }
         <InventoryControls
           fields={items.length > 0 ? Object.keys(items[0]) : []}
           visibleFields={visibleFields}
@@ -104,6 +107,8 @@ export default function Dashboard({ token, setToken }) {
           onRefresh={handleRefresh}
           onExport={handleExport}
         />
+
+        {/* Add Item button */}
         <Button
           onClick={() => {
             setAddModalOpen(true);
