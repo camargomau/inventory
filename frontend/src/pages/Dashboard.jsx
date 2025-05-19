@@ -29,6 +29,10 @@ export default function Dashboard({ token, setToken }) {
   // State for visible fields (lifted from InventoryTable)
   const [visibleFields, setVisibleFields] = useState(items.length > 0 ? Object.keys(items[0]) : []);
 
+  // State for add item modal
+  // 0 to reset the modal every time
+  const [addModalKey, setAddModalKey] = useState(0);
+
   // Update visibleFields when items change (e.g., after adding first item)
   useEffect(() => {
     setVisibleFields(items.length > 0 ? Object.keys(items[0]) : []);
@@ -70,7 +74,10 @@ export default function Dashboard({ token, setToken }) {
           onExport={handleExport}
         />
         <Button
-          onClick={() => setAddModalOpen(true)}
+          onClick={() => {
+            setAddModalOpen(true);
+            setAddModalKey((k) => k + 1);
+          }}
           leftSection={<Plus size={16} />}
         >
           Add Item
@@ -79,10 +86,12 @@ export default function Dashboard({ token, setToken }) {
 
       {/* Modal for adding a new item */}
       <AddItemModal
+        key={addModalKey}
         opened={addModalOpen}
         onClose={() => {
           setAddModalOpen(false);
           setAddError("");
+          setAddModalKey((k) => k + 1);
         }}
         onAdd={handleAdd}
         error={addError}
