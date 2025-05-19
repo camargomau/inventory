@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Table,
   Button,
@@ -38,7 +38,15 @@ export default function InventoryTable({
   deletedIds = [],
   addedIds = [],
 }) {
-  const [visibleFields, setVisibleFields] = useState(() => getFields(items));
+  // Always recalculate fields when items change
+  const fields = getFields(items);
+  const [visibleFields, setVisibleFields] = useState(fields);
+
+  // Update visibleFields when items change (e.g., after adding first item)
+  useEffect(() => {
+    setVisibleFields(getFields(items));
+  }, [items]);
+
   const [sortField, setSortField] = useState(null);
   const [sortAsc, setSortAsc] = useState(true);
   const [editRowId, setEditRowId] = useState(null);
@@ -81,6 +89,15 @@ export default function InventoryTable({
     if (editedIds.includes(id)) return { background: "#eaf0ff" };
     return {};
   };
+
+  // If no items, show a message and no table/buttons
+  if (items.length === 0) {
+    return (
+      <Group position="center" mt="md">
+        <Text color="dimmed">No items in inventory yet.</Text>
+      </Group>
+    );
+  }
 
   return (
     <ScrollArea>
