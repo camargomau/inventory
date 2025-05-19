@@ -11,9 +11,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       withGlobalStyles
       withNormalizeCSS
       theme={{
-        primaryColor: "cyan",
+        primaryShade: 8,
         defaultRadius: "md",
         fontFamily: "Inter, sans-serif",
+        white: "#f5f5f5",
       }}
     >
       <App />
