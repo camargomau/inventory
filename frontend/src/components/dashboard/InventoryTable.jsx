@@ -24,7 +24,6 @@ export default function InventoryTable({
   // State for editing rows
   const [editRowId, setEditRowId] = useState(null);
   const [editRowData, setEditRowData] = useState({});
-  const [setAddModalOpen] = useState(false);
 
   // Sorting handler
   const handleSort = (field) => {
