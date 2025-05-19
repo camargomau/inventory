@@ -62,7 +62,7 @@ export default function Dashboard({ token, setToken }) {
 
   // Render dashboard with inventory table, inventory controrls and add item modal
   return (
-    <div>
+    <div style={{ padding: "20px 24px" }}>
       {/* Header with title, username, and sign out button */}
       <Group justify="space-between" mb="md">
         <Title order={2}>Dashboard</Title>
