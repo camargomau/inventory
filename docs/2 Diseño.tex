@@ -14,7 +14,11 @@ El sistema tiene los siguientes casos de uso principales:
 
 El sistema implementa autenticación basada en JWT (JSON Web Tokens) para proteger los endpoints sensibles y garantizar que solo los usuarios autorizados puedan realizar operaciones sobre el inventario.
 
-% \includegraphics{diagrams/usecase.png}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{diagrams/usecase}
+    \caption{Casos de uso}
+\end{figure}
 
 \subsection{Componentes}
 
@@ -26,7 +30,11 @@ El sistema se compone de tres componentes principales:
     \item \textbf{Base de Datos}: Servidor MySQL que almacena la información de usuarios, productos, inventario y operaciones.
 \end{itemize}
 
-% \includegraphics{diagrams/architecture.png}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{diagrams/architecture}
+    \caption{Arquitectura general}
+\end{figure}
 
 \subsection{Interacción entre Componentes}
 
@@ -38,9 +46,55 @@ El sistema se compone de tres componentes principales:
     \item Para ciertas operaciones, el usuario puede exportar la información visualizada en la interfaz a un archivo PDF.
 \end{itemize}
 
-A continuación, los diversos diagramas que ilustran la interacción entre estos componentes para los distintos casos de uso:
+A continuación, los diversos diagramas que ilustran la interacción entre estos componentes para los distintos casos de uso.
 
-% \includegraphics{diagrams/todos los de sequence}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{diagrams/sequence/register}
+    \caption{Secuencia: Registro de usuario}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{diagrams/sequence/login}
+    \caption{Secuencia: Inicio de sesión}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{diagrams/sequence/view}
+    \caption{Secuencia: Consulta de inventario}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{diagrams/sequence/add}
+    \caption{Secuencia: Agregar ítem}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{diagrams/sequence/update}
+    \caption{Secuencia: Editar ítem}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{diagrams/sequence/delete}
+    \caption{Secuencia: Eliminar ítem}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{diagrams/sequence/restore}
+    \caption{Secuencia: Restaurar ítem}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrams/sequence/export}
+    \caption{Secuencia: Exportar a PDF}
+\end{figure}
 
 \subsection{Modelo de Datos}
 
@@ -52,4 +106,8 @@ La base de datos relacional está compuesta por las siguientes tablas principale
     \item \textbf{operations}: Guarda un historial de las operaciones realizadas sobre el inventario.
 \end{itemize}
 
-% \includegraphics{diagrams/inventorydb.png}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{diagrams/inventorydb}
+    \caption{Diseño de la base de datos}
+\end{figure}
