@@ -18,8 +18,8 @@ export default function LandingPage({ setToken }) {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
-          <Package size={28} />
-          <h2 style={{ textAlign: "center", marginTop: 0, marginBottom: 0 }}>Inventory</h2>
+          <Package size={36} />
+          <h1 style={{ textAlign: "center", marginTop: 0, marginBottom: 0 }}>Inventory</h1>
         </div>
         <p style={{ textAlign: "center", marginBottom: 0 }}>
           This web application allows you to manage a store or business inventory.
