@@ -4,11 +4,11 @@ sequenceDiagram
     participant B as Backend (Spring Boot)
     participant D as Base de datos (MySQL)
 
-    U->>F: Clic al botón "Borrar" del ítem
-    F->>B: DELETE /api/items/{id}
-    B->>D: UPDATE items SET available = false WHERE id=...
+    U->>F: Clic al botón "Restaurar" del ítem
+    F->>B: POST /api/items/{id}/restore
+    B->>D: UPDATE items SET available = true WHERE id=...
     D-->>B: Éxito/Fallo
-    B->>D: INSERT INTO operations (delete)
+    B->>D: INSERT INTO operations (update)
     D-->>B: Éxito
-    B-->>F: Respuesta de eliminar
+    B-->>F: Respuesta de restaurar
     F-->>U: Mostrar el resultado
