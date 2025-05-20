@@ -24,7 +24,7 @@ docker compose up --build
 This will build and start all services. The frontend will be available at [http://localhost:80](http://localhost:80) and the backend API at [http://localhost:8080](http://localhost:8080).
 
 ## Folder Structure
-```
+
 - **backend/**: Contains all backend code, including API endpoints, security, database entities, and configuration. Built with Java Spring Boot.
 - **frontend/**: Contains the React application for the user interface, including components, hooks, and utilities.
 - **docs/**: Contains LaTeX files aand diagrams for the project report and technical documentation (in Spanish).
