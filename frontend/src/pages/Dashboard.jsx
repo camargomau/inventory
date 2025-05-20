@@ -54,7 +54,11 @@ export default function Dashboard({ token, setToken }) {
     <div style={{ padding: "20px 24px" }}>
       {/* Header with title, username, and sign out button */}
       <Group justify="space-between" mb="md">
-        <Title order={2}>Inventory</Title>
+        <Group>
+          {/* Inventory icon and title */}
+          <Package size={32}/>
+          <Title order={2}>Inventory</Title>
+        </Group>
         <Group>
           {/* Show username */}
           {username && (
