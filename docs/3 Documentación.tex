@@ -1,0 +1,41 @@
+\section{Tecnologías Utilizadas}
+
+El desarrollo del sistema requirió la integración de diversas tecnologías modernas que se seleccionaron en función a su facilidad de uso y compatibilidad con los objetivos del proyecto.
+
+\begin{itemize}
+    \item \textbf{React}: Biblioteca de JavaScript utilizada para construir la interfaz de usuario (frontend). Permite crear componentes reutilizables y una experiencia dinámica e interactiva para el usuario.
+    \item \textbf{Vite}: Herramienta de construcción y desarrollo rápido para proyectos frontend en React, utilizada para optimizar el flujo de trabajo y la velocidad de desarrollo.
+    \item \textbf{Mantine UI}: Biblioteca de componentes de interfaz para React, empleada para lograr una apariencia moderna en la aplicación, sin tener que desarrollar los componentes desde cero.
+    \item \textbf{Java Spring Boot}: Framework para el desarrollo del backend, encargado de la exposición de la API REST y la gestión de la seguridad y autenticación.
+    \item \textbf{MySQL}: Sistema de gestión de bases de datos relacional, utilizado para almacenar de manera persistente la información de usuarios, productos y operaciones.
+    \item \textbf{JWT (JSON Web Tokens)}: Tecnología de autenticación y autorización, utilizada para proteger los endpoints sensibles.
+    \item \textbf{Docker}: Plataforma de contenedores empleada para facilitar el despliegue y la ejecución del sistema en cualquier entorno, asegurando la portabilidad.
+    \item \textbf{Docker Compose}: Herramienta para orquestar múltiples contenedores de Docker (frontend, backend y base de datos) y simplificar su despliegue.
+    \item \textbf{jsPDF}: Librería de JavaScript utilizada en el frontend para exportar los reportes de inventario en formato PDF.
+    \item \textbf{Axios}: Cliente HTTP para JavaScript, empleado en el frontend para realizar solicitudes a la API REST del backend.
+\end{itemize}
+
+\section{Ejecución del Proyecto con Docker}
+
+Para facilitar la ejecución y despliegue del sistema, se utilizó Docker. Esto permite levantar todos los servicios necesarios (frontend, backend y base de datos) con un solo comando, sin preocuparse por dependencias o configuraciones específicas del entorno local.
+
+\subsection{Requisitos Previos}
+
+\begin{itemize}
+    \item Tener instalado Docker y Docker Compose en el sistema.
+    \item No tener otros servicios ocupando los puertos 80, 8080 o 3306.
+\end{itemize}
+
+\subsection{Instrucciones}
+
+Desde la raíz del proyecto, ejecutar:
+
+\begin{lstlisting}[style=terminal]
+docker-compose up --build
+\end{lstlisting}
+
+Esto construirá y levantará todos los servicios. La aplicación frontend estará disponible en \texttt{http://localhost}, el backend en \texttt{http://localhost:8080} y el servidor MySQL en el puerto 3306 (\texttt{localhost:3306}).
+
+\section{Casos de Ejecución}
+
+(falta)
