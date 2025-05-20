@@ -38,4 +38,136 @@ Esto construirá y levantará todos los servicios. La aplicación frontend estar
 
 \section{Casos de Ejecución}
 
-(falta)
+Al ingresar a la URL de la aplicación web, se llega a la pantalla inicial, donde se muestra el título del proyecto, una breve descripción de su funcionalidad y, más abajo, un cuadro de autenticación donde el usuario puede iniciar sesión, si ya tiene una cuenta, o registrarse si no la tiene todavía.
+
+\includegraphics[width=\textwidth]{images/1 Pantalla Inicial}
+
+\subsection{Autenticación}
+
+\subsubsection{Registro}
+
+Inicialmente, no existe ningún usuario registrado, así que se debe registrar uno nuevo. Para ello, se da clic en el botón “Don't have an account?” y luego se debe completar el formulario de registro con un nombre de usuario, un correo electrónico y una contraseña. El usuario quedará registrado una vez que se haga clic en el botón “Register”, redirigiendo a la pantalla de inventario que se verá más adelante.
+
+\includegraphics[width=\textwidth]{images/2 Registro}
+
+\subsubsection{Inicio de Sesión}
+
+Cuando un usuario ya está registrado, puede iniciar sesión simplemente ingresando su correo electrónico y contraseña en el formulario correspondiente, que aparece por defecto al ingresar la aplicación. Al hacer clic en el botón “Login”, se redirigirá a la pantalla de inventario. Para acceder a este formulario desde el formulario de registro, basta con darle clic al botón “Already have an account?”.
+
+\includegraphics[width=\textwidth]{images/3 Inicio de Sesión}
+
+\subsection{Inventario}
+
+Después de registrarse o iniciar sesión, se redirige al usuario a la pantalla de inventario.
+
+\includegraphics[width=\textwidth]{images/4 Inventario}
+
+En esta pantalla es donde se lleva a cabo la gran parte de la funcionalidad del sistema. En la parte superior, se encuentra el nombre de la aplicación, el nombre del usuario actualmente autenticado y un botón para cerrar sesión. En la parte inferior, se muestra una tabla con los ítems que se encuentran en el inventario, que inicialmente está vacía.
+
+Arriba de la tabla, aparecen algunos controles para manipularla o interactuar con el sistema. Estos controles son, de izquierda a derecha:
+
+\begin{itemize}
+    \item Un botón para actualizar la vista de la tabla.
+    \item Un botón para elegir qué campos se desean mostrar en la tabla.
+    \item Un botón para exportar la vista actual de la tabla a un archivo PDF.
+    \item Un botón para mostrar los ítems eliminados.
+    \item Un botón para agregar un nuevo ítem al inventario.
+\end{itemize}
+
+\subsubsection{Cierre de Sesión}
+
+Para cerrar sesión, basta con darle clic al botón “Sign Out”, lo que redirigirá a la pantalla inicial donde los usuarios se pueden auntenticar.
+
+\includegraphics[width=\textwidth]{images/5 Cierre de Sesión}
+
+\subsubsection{Agregar ítem}
+
+Para agregar un nuevo ítem al inventario, se debe hacer clic en el botón “Add Item”. Esto abrirá un formulario donde se deben completar los campos requeridos: nombre,SKU, descripción, precio y cantidad. Una vez completados, se debe hacer clic en el botón “Add” para guardar el nuevo ítem en la base de datos.
+
+\includegraphics[width=\textwidth]{images/6 Agregar}
+
+También existe la opción de insertar directamente estos campos en un formato JSON, seleccionando la pestaña correspondiente.
+
+\includegraphics[width=\textwidth]{images/7 Agregar JSON}
+
+Los ítems agregados aparecen en color verde.
+
+\includegraphics[width=\textwidth]{images/8 Agregado}
+
+Si existe algún impedimento para agregar el ítem, se le notificará al usuario. Por ejemplo, si el SKU ya existe o si el JSON no es válido.
+
+\includegraphics[width=\textwidth]{images/9 Agregar Error}
+\includegraphics[width=\textwidth]{images/10 Agregar Error JSOn}
+
+Una vez que ya se tiene al menos un ítem en el inventario, al final de cada fila aparecen dos botones: uno para editar y otro para eliminar.
+
+\includegraphics[width=\textwidth]{images/11 Varios Ítems}
+
+\subsubsection{Elegir Columnas Mostradas}
+
+Es posible darle clic al botón “Show/Hide” para cambiar las columnas mostradas.
+
+\includegraphics[width=\textwidth]{images/12 Campos Mostrados}
+
+\subsubsection{Editar ítem}
+
+Para editar un ítem existente, se debe hacer clic en el botón de editar correspondiente a la fila del ítem que se desea modificar. Después de hacerlo, la fila cambiará, permitiendo editar los campos que se permiten modificar (todos a excepción de ID, SKU y Creation Date).
+
+\includegraphics[width=\textwidth]{images/13 Editar}
+
+Una vez que se han hecho los cambios deseados, se pueden cancelar o enviar haciendo clic en los botones correspondientes, al final de la fila. Si enviamos los cambios, se solicita una confirmación.
+
+\includegraphics[width=\textwidth]{images/14 Editar Confirmación}
+
+Después de confirmar, podemos verificar que la información cambió y que la fila cambió a color azul.
+
+\includegraphics[width=\textwidth]{images/15 Fila Editada}
+
+\subsubsection{Eliminar ítem}
+
+Para eliminar un ítem, se debe hacer clic en el botón de eliminar en la fila correspondiente. Después de hacerlo, se solicitará una confirmación para proceder con la eliminación.
+
+\includegraphics[width=\textwidth]{images/16 Eliminar Confirmación}
+
+Una vez eliminado, la fila no desaparece, sino que se pone en color rojo con su texto tachadoo.
+
+\includegraphics[width=\textwidth]{images/17 Fila Eliminada}
+
+\subsubsection{Actualizar la Vista}
+
+Hasta ahora, hemos visto que las filas de los objetos agregados, modificados y eliminados cambian de color.
+
+\includegraphics[width=\textwidth]{images/18 Colores}
+
+Estos colores y la vista de los ítems ya eliminados son temporales. Para hacerlos desaparecer, se debe hacer clic en el botón “Refresh”.
+
+\includegraphics[width=\textwidth]{images/19 Actualizado}
+
+Este botón también actualizará la vista, mostrando los cambios en el inventario que algún otro usuario haya hecho.
+
+\subsubsection{Exportar a PDF}
+
+Para exportar la vista actual de la tabla a un archivo PDF, se debe hacer clic en el botón “PDF”. Esto generará un archivo PDF con el contenido de la tabla, que se descargará automáticamente. Esta funcionalidad es especialmente útil cuando todavía tenemos los ítems manipulados en colores, pues el PDF se exporta con esos colores, permitiendo esencialmente guardar un registro de los cambios realizados.
+
+\includegraphics[width=\textwidth]{images/20 PDF Colores}
+
+Si las filas no están coloreadas, permanecerán de esa forma.
+
+\includegraphics[width=\textwidth]{images/21 PDF Actualizado}
+
+\subsubsection{Restaurar ítem}
+
+Si queremos ver los ítems que han sido eliminados, basta con darle clic al botón “Show Deleted”.
+
+\includegraphics[width=\textwidth]{images/22 Eliminados}
+
+Para regresar a la vista normal de los ítems activos, se da clic al botón “Show Active”.
+
+En esta vista de ítems eliminados, se tiene la opción de restaurarlos (es decir, hacerlos activos de nuevo). Para hacerlo, se da clic al botón de restaurar que aparece al final de cada fila, pidiendo una confirmación.
+
+\includegraphics[width=\textwidth]{images/23 Restaurar Confirmación}
+
+Los ítems restaurados aparecen en color naranja y, similar a los eliminados en la vista normal, desaparecerán una vez que se actualice la vista.
+
+\includegraphics[width=\textwidth]{images/24 Restaurado}
+\includegraphics[width=\textwidth]{images/25 Eliminados Actualizado}
