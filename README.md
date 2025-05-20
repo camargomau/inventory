@@ -15,13 +15,14 @@ This project is a full-stack web application for managing inventories. It allows
 
 ## Quick Start (Docker)
 
-To run the entire application (frontend, backend, and database) with a single command, use Docker Compose. Make sure you have Docker and Docker Compose installed.
+To run the entire application (frontend, backend, and database) with a single command, use Docker Compose. Make sure you have Docker and Docker Compose installed, then run:
 
 ```sh
 docker compose up --build
 ```
 
-This will build and start all services. The frontend will be available at [http://localhost:80](http://localhost:80) and the backend API at [http://localhost:8080](http://localhost:8080).
+This will build and start all services. The frontend will be available at [http://localhost](http://localhost). If you wish to contact the backend API directly, it will be available at [http://localhost:8080](http://localhost:8080), while the MySQL server will be available at [http://localhost:3306](http://localhost:3306).
+
 
 ## Folder Structure
 
