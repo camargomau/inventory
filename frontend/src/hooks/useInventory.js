@@ -104,7 +104,8 @@ export function useInventory(token) {
         if (addedIds.includes(id)) return { background: "#eaffea" };
         if (editedIds.includes(id)) return { background: "#eaf0ff" };
         return {};
-      }
+      },
+      showDeleted
     );
   };
 
