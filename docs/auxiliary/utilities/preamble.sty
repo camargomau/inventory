@@ -24,7 +24,10 @@
 \usepackage{listings}
 \usepackage{enumitem}
 
-\usepackage[nottoc,numbib]{tocbibind}
+\usepackage[style=apa, backend=biber]{biblatex}
+\usepackage[autostyle, spanish=mexican]{csquotes}
+\DeclareLanguageMapping{spanish}{spanish-apa}
+\addbibresource{auxiliary/references.bib}
 
 % 0 for not using numbering, 1 for numbering chapters
 % 2 for chapters and sections, etc.
@@ -34,8 +37,9 @@
 \hypersetup{
     breaklinks=true,
     colorlinks=true,
-    linkcolor=DodgerBlue3,
-    urlcolor=DodgerBlue3
+    linkcolor=black,
+    urlcolor=DodgerBlue3,
+    citecolor=black,
 }
 
 \lstdefinestyle{code}{
@@ -57,5 +61,3 @@
     showspaces=false,
     showstringspaces=false,
 }
-
-\bibliographystyle{apalike}
