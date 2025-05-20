@@ -21,8 +21,9 @@ To run the entire application (frontend, backend, and database) with a single co
 docker compose up --build
 ```
 
-This will build and start all services. The frontend will be available at [http://localhost](http://localhost). If you wish to contact the backend API directly, it will be available at [http://localhost:8080](http://localhost:8080), while the MySQL server will be available at [http://localhost:3306](http://localhost:3306).
+This will build and start all services. The frontend will be available at [http://localhost](http://localhost). If you wish to contact the backend API directly, it will be available at [http://localhost:8080](http://localhost:8080), while the MySQL server will be accessible on port 3306 (`localhost:3306`).
 
+Make sure you do not have any other services or applications running on ports 80, 8080, or 3306, or Docker Compose may fail to start the containers.
 
 ## Folder Structure
 
