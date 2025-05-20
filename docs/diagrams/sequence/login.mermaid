@@ -8,5 +8,5 @@ sequenceDiagram
     F->>B: POST /api/auth/login (credenciales)
     B->>D: SELECT user by email
     D-->>B: Datos del usuario
-    B-->>F: Token JWT token o error
+    B-->>F: Token JWT o error
     F-->>U: Continuar a la página principal
