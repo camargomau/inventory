@@ -42,8 +42,8 @@ export function exportInventoryPdf(items, fields, rowStyles, deletedView = false
     headStyles: deletedView ? { fillColor: [50, 50, 50], textColor: [225, 225, 225] } : {},
 
     didParseCell: function (data) {
-      // if there are custom style options for the current row…
-      if (rowOptions[data.row.index]) {
+      // if there are custom style options for the current row… (only for body rows)
+      if (data.section === 'body' && rowOptions[data.row.index]) {
         // if there is a background colour
         if (rowOptions[data.row.index].fillColor) {
           data.cell.styles.fillColor = rowOptions[data.row.index].fillColor;
